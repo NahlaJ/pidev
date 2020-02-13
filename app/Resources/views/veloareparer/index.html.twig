@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Veloareparers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Marque</th>
+                <th>Description</th>
+                <th>Probleme</th>
+                <th>Age</th>
+                <th>Dater</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for veloAReparer in veloAReparers %}
+            <tr>
+                <td><a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">{{ veloAReparer.id }}</a></td>
+                <td>{{ veloAReparer.marque }}</td>
+                <td>{{ veloAReparer.description }}</td>
+                <td>{{ veloAReparer.probleme }}</td>
+                <td>{{ veloAReparer.age }}</td>
+                <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ veloAReparer.image }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('veloR_new') }}">Create a new veloAReparer</a>
+        </li>
+    </ul>
+{% endblock %}

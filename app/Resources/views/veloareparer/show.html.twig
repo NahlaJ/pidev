@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, td, th {
+            border: 1px solid black;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+    </head>
+   <center><h1>Repair Bike</h1>
+
+    <table >
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ veloAReparer.id }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ veloAReparer.marque }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ veloAReparer.description }}</td>
+            </tr>
+            <tr>
+                <th>Probleme</th>
+                <td>{{ veloAReparer.probleme }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ veloAReparer.age }}</td>
+            </tr>
+            <tr>
+                <th>Dater</th>
+                <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ veloAReparer.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('veloR_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+   </center>
+{% endblock %}

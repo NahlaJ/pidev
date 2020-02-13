@@ -1,0 +1,44 @@
+shop_commande:
+    resource: "@ShopBundle/Controller/commandeController.php"
+    type:     annotation
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
+main:
+    resource: "@MainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+article:
+    resource: "@ArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+reparation:
+    resource: "@ReparationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /
+
+location:
+    resource: "@LocationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+shop:
+    resource: "@ShopBundle/Resources/config/routing.yml"
+    prefix:   /
+
+catalogue:
+    resource: "@CatalogueBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
