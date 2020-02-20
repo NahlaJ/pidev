@@ -22,3 +22,7 @@ veloR_delete:
     path:     /{id}/delete
     defaults: { _controller: "ReparationBundle:VeloAReparer:delete" }
     methods:  DELETE
+veloR_affect:
+    path:     /affect/{id}
+    defaults: { _controller: "ReparationBundle:VeloAReparer:affect" }
+    methods:  [GET, POST]

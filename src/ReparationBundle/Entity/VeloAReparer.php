@@ -3,6 +3,8 @@
 namespace ReparationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * VeloAReparer
@@ -12,6 +14,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VeloAReparer
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * ORM\JoinColumn(name="user_id",referencedColumnName="id")
+     */
+    private $User;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ReparationBundle\Entity\Reparateur")
+     * ORM\JoinColumn(name="reparateur_id",referencedColumnName="id")
+     */
+    private $Reparateur;
+
     /**
      * @var int
      *
@@ -58,7 +72,6 @@ class VeloAReparer
 
     /**
      * @var string
-     *
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
@@ -219,5 +232,52 @@ class VeloAReparer
     }
 
 
-}
 
+    /**
+     * Set reparateur
+     *
+     * @param \ReparationBundle\Entity\Reparateur $reparateur
+     *
+     * @return VeloAReparer
+     */
+    public function setReparateur(\ReparationBundle\Entity\Reparateur $reparateur)
+    {
+        $this->Reparateur = $reparateur;
+
+        return $this;
+    }
+
+    /**
+     * Get reparateur
+     *
+     * @return \ReparationBundle\Entity\Reparateur
+     */
+    public function getReparateur()
+    {
+        return $this->Reparateur;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return VeloAReparer
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+}

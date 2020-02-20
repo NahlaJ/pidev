@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Ajouter le vélo à réparer</h1>
+<center>
+    <div class="card-header">
+
+    <h3 class="card-title">Add the Bike</h3>
+    </div>
+
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_widget(form) }}
+    <input type="submit" class="btn btn-primary" value="Create" />
     {{ form_end(form) }}
+
 
     <ul>
         <li>
-            <a href="{{ path('veloR_index') }}">Back to the list</a>
+            <a href="{{ path('veloR_index') }}" class="btn btn-primary">Back to the list</a>
         </li>
     </ul>
+
+</center>
+
 {% endblock %}

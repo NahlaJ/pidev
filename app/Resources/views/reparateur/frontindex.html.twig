@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+
+                                    <div class="bikes">
+                                        <div class="mountain-sec">
+
+                                            <h2>Repairers List</h2>
+                                            {% for reparateur in reparateurs %}
+                                                <div class="bike">
+
+                                            <a href="{{ path('reparateur_frontshow', { 'id': reparateur.id }) }}">
+
+
+                                                    <div class="bike-cost">
+
+                                                    <img src="{{ asset('uploads/images/' ~ reparateur.image) }}">
+                                                        <div class="bike-mdl">
+                                                            <h4>{{ reparateur.nom }}</h4>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="fast-viw">
+                                                        <a href="{{ path('reparateur_frontshow', { 'id': reparateur.id }) }}">View Repairer</a>
+                                                    </div>
+                                                </div></a>
+
+
+                                    {% endfor %}
+                                            <div class="clearfix"></div>
+
+                                        </div>
+    </div>
+
+
+{% endblock %}

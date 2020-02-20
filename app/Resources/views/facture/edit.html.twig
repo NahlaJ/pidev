@@ -1,39 +1,41 @@
 {% extends 'dashbase.html.twig' %}
 
 {% block content %}
-<head>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
+<div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
 
-        table, td, th {
-            border: 1px solid black;
-        }
-        th, td {
-            border-bottom: 1px solid #ddd;
-        }
-    </style>
-</head>
-<center>
-    <table >
-    <h1>Facture edit</h1>
+                        <div class="card-body">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Edit the Bill </h4>
+                            </div>
+                                <table class="table">
+
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" class="btn btn-primary" value="Edit" />
     {{ form_end(edit_form) }}
 
     <ul>
         <li>
-            <a href="{{ path('facture_index') }}">Back to the list</a>
+            <a href="{{ path('facture_index') }}" class="btn btn-primary" >Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-primary" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
     </table>
-</center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}

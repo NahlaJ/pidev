@@ -2,8 +2,11 @@
 
 namespace ReparationBundle\Controller;
 
+use ReparationBundle\Entity\Reparateur;
 use ReparationBundle\Entity\VeloAReparer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,22 +36,35 @@ class VeloAReparerController extends Controller
      */
     public function newAction(Request $request)
     {
-        $veloAReparer = new Veloareparer();
-        $form = $this->createForm('ReparationBundle\Form\VeloAReparerType', $veloAReparer);
-        $form->handleRequest($request);
+            $veloAReparer = new Veloareparer();
+            $form = $this->createForm('ReparationBundle\Form\VeloAReparerType', $veloAReparer);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($veloAReparer);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                /**
+                 * @var UploadedFile $file
+                 */
+                $file = $veloAReparer->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            return $this->redirectToRoute('veloR_show', array('id' => $veloAReparer->getId()));
-        }
+                $file->move(
+                    $this->getParameter('images_directory'), $fileName
+                );
 
-        return $this->render('veloareparer/new.html.twig', array(
-            'veloAReparer' => $veloAReparer,
-            'form' => $form->createView(),
-        ));
+                $veloAReparer->setImage($fileName);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($veloAReparer);
+                $em->flush();
+
+                return $this->redirectToRoute('veloR_new', array('id' => $veloAReparer->getId()));
+            }
+
+            return $this->render('veloareparer/new.html.twig', array(
+                'veloAReparer' => $veloAReparer,
+                'form' => $form->createView(),
+            ));
+
     }
 
     /**
@@ -71,11 +87,26 @@ class VeloAReparerController extends Controller
      */
     public function editAction(Request $request, VeloAReparer $veloAReparer)
     {
+        $img=$veloAReparer->getImage();
+        $veloAReparer->setImage(
+            new \Symfony\Component\HttpFoundation\File\File($this->getParameter('images_directory').'/'.$veloAReparer->getImage()
+            ));
         $deleteForm = $this->createDeleteForm($veloAReparer);
         $editForm = $this->createForm('ReparationBundle\Form\VeloAReparerType', $veloAReparer);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            /**
+             * @var UploadedFile $file
+             */
+            $file = $veloAReparer->getImage();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+            $file->move(
+                $this->getParameter('images_directory'), $fileName
+            );
+
+            $veloAReparer->setImage($fileName);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('veloR_edit', array('id' => $veloAReparer->getId()));
@@ -120,5 +151,19 @@ class VeloAReparerController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    public function affectAction(VeloAReparer $veloAReparer , Request $request)
+    {
+        $reps = $this->getDoctrine()->getRepository(Reparateur::class)->findBy(['status'=> 'libre']);
+        if ($request->getMethod() == Request::METHOD_POST){
+            print $request->request->get('rep');
+            $myRep = $this->getDoctrine()->getRepository(Reparateur::class)->find($request->request->get('rep'));
+            $veloAReparer->setReparateur($myRep);
+            $myRep->setStatus("occupé");
+            $this->getDoctrine()->getManager()->persist($myRep);
+            $this->getDoctrine()->getManager()->persist($veloAReparer);
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return $this->render('veloareparer/affecter.html.twig',array('reps'=> $reps) );
     }
 }

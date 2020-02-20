@@ -68,12 +68,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="parts.html">DISC BREAKS</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown1"><a href="accessories.html">MAINTENANCE</a>
+                        <li class="dropdown1"><a>MAINTENANCE</a>
                             <ul class="dropdown2">
-                                <li><a href="accessories.html">LOCKS</a></li>
-                                <li><a href="accessories.html">HELMETS</a></li>
-                                <li><a href="accessories.html">ARM COVERS</a></li>
-                                <li><a href="accessories.html">JERSEYS</a></li>
+                                <li><a href="{{ path('reparateur_frontindex') }}">Repairers list</a></li>
+                                <li><a href="{{ path('veloR_new') }}">Add your broken bike</a></li>
+
+
                             </ul>
                         </li>
                         <li class="dropdown1"><a href="404.html">EVENT</a>
@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 {% block content %}
-    le contenu
+
 {% endblock %}
 
 {% block footer %}
@@ -120,7 +120,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul>
                     <li><a href="bicycles.html">SHOP</a></li>
                     <li><a href="parts.html">RENTING</a></li>
-                    <li><a href="accessories.html">MAINTENANCE</a></li>
+                    <li><a href="{{ path('veloR_index') }}">MAINTENANCE</a></li>
                     <li><a href="404.html">EVENT</a></li>
                     <li><a href="404.html">ARTICLES</a></li>
                 </ul>

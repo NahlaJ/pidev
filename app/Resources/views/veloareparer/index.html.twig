@@ -1,21 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashbase.html.twig' %}
 
 {% block content %}
-    <h1>Veloareparers list</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Marque</th>
-                <th>Description</th>
-                <th>Probleme</th>
-                <th>Age</th>
-                <th>Dater</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bikes</h4>
+                        <p class="card-category">The list of broken bikes</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Brand</th>
+                                    <th>Description</th>
+                                    <th>Problem</th>
+                                    <th>Age</th>
+                                    <th>Return Date</th>
+                                    <th>Image</th>
+
+                                </tr>
+                                </thead>
+
         <tbody>
         {% for veloAReparer in veloAReparers %}
             <tr>
@@ -25,14 +37,21 @@
                 <td>{{ veloAReparer.probleme }}</td>
                 <td>{{ veloAReparer.age }}</td>
                 <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ veloAReparer.image }}</td>
+
+
+                <td><img src="{{ asset('uploads/images/' ~ veloAReparer.image) }}" style="height: 100px;width: 100px"></td>
+
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">show</a>
+                            <a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">Show</a>
                         </li>
                         <li>
-                            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">edit</a>
+                            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">Edit</a>
+
+                        </li>
+                        <li>
+                            <a href="{{ path('veloR_affect', { 'id': veloAReparer.id }) }}">Affect</a>
                         </li>
                     </ul>
                 </td>
@@ -43,7 +62,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('veloR_new') }}">Create a new veloAReparer</a>
+            <a href="{{ path('veloR_new') }}">Add a new broken bike</a>
         </li>
     </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

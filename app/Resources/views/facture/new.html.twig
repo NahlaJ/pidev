@@ -1,11 +1,22 @@
 {% extends 'dashbase.html.twig' %}
 
 {% block content %}
-    <h1>Facture creation</h1>
+<div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Add a new Bill</h4>
+                            </div>
+                            <table class="table">
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input type="submit" class="btn btn-primary" value="Create" />
     {{ form_end(form) }}
 
     <ul>
@@ -13,4 +24,13 @@
             <a href="{{ path('facture_index') }}">Back to the list</a>
         </li>
     </ul>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

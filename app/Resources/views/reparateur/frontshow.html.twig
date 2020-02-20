@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="product">
+    <div class="container">
+        <div class="ctnt-bar cntnt">
+            <div class="content-bar">
+                <div class="single-page">
+                    <div class="product-head">
+                        <a href="{{ path('reparateur_frontindex') }}">Go Back to the Repairers List</a>
+                    </div>
+
+                    <link rel="stylesheet" href ="{{ asset('css/etalage.css')}}">
+                    <script src="{{ asset('js/jquery.etalage.min.js')}}"></script>
+                    <script>
+                        jQuery(document).ready(function($){
+
+                            $('#etalage').etalage({
+                                thumb_image_width: 400,
+                                thumb_image_height: 400,
+                                source_image_width: 800,
+                                source_image_height: 1000,
+                                show_hint: true,
+                                click_callback: function(image_anchor, instance_id){
+                                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                                }
+                            });
+
+                        });
+                    </script>
+
+                    <div class="details-left-slider">
+                        <div class="grid images_3_of_2">
+                            <ul id="etalage">
+                                <li>
+                                    <a href="#">
+                                        <img src="{{ asset('uploads/images/' ~ reparateur.image) }}" class="etalage_thumb_image"  class="img-responsive" />
+                                        <img class="etalage_source_image" src="{{ asset('uploads/images/' ~ reparateur.image) }}" class="img-responsive" title="" />
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="details-left-info">
+                       <td> <h1>{{ reparateur.nom }}</h1></td>
+                        <td><h2>{{ reparateur.prenom }}</h2></td>
+                        <br><a href="#">Contact</a></p>
+                        <p><label>Estimated response : From 1 to 3 days</label>
+
+
+                        <div class="bike-type">
+                            <p>Experience: <td>{{ reparateur.experience }}</td> years</p>
+                            <p>Phone Number: <td>{{ reparateur.numTel }}</td>
+                            </p>
+                        </div>
+                        <h5>Works for us</h5>
+                        <p class="desc"> You can trust every employee!</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

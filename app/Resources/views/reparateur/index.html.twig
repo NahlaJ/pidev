@@ -1,0 +1,70 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Repairers</h4>
+                        <p class="card-category">List of Repairers</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Numtel</th>
+                <th>Experience</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reparateur in reparateurs %}
+            <tr>
+                <td><a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">{{ reparateur.id }}</a></td>
+                <td>{{ reparateur.nom }}</td>
+                <td>{{ reparateur.prenom }}</td>
+                <td>{{ reparateur.numTel }}</td>
+                <td>{{ reparateur.experience }}</td>
+                {% if reparateur.status == "occupé" %}
+
+                <td><p style="color:#9F0053";>{{ reparateur.status }}</p></td>
+                {% else %}
+                    <td><p style="color:#00ff80";>{{ reparateur.status }}</p></td>
+
+                    {% endif %}
+                    <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reparateur_new') }}">Add a new repairer</a>
+        </li>
+    </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

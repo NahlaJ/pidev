@@ -1,3 +1,7 @@
+reparation_reparateur:
+    resource: "@ReparationBundle/Controller/ReparateurController.php"
+    type:     annotation
+
 shop_commande:
     resource: "@ShopBundle/Controller/commandeController.php"
     type:     annotation

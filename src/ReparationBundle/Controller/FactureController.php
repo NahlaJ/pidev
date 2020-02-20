@@ -5,6 +5,8 @@ namespace ReparationBundle\Controller;
 use ReparationBundle\Entity\Facture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Snappy\Pdf;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Facture controller.
@@ -121,4 +123,26 @@ class FactureController extends Controller
             ->getForm()
         ;
     }
+    public function pdfAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $facture = $em->getRepository('ReparationBundle:Facture')->findAll();
+        $snappy = $this->get('knp_snappy.pdf');
+
+        $html = $this->renderView("facture/pdf.html.twig", array(
+            'f' => $facture,
+            "title" => "Facture"
+        ));
+        $filename ="pdf_from_twig";
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
+
+
 }

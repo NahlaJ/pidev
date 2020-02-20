@@ -1,0 +1,38 @@
+{% block body %}
+
+<center><h1 style="color:#ff8a65"><strong>Velo.TN</strong></h1></center>
+    <center><h1 style="color:#9F0053";>The list of Bills</h1></center>
+<center>
+<table>
+     <tbody>
+        <tr>
+            {% for facture in f %}
+
+            <th style="color: #0a6ebd" >Id :</th>
+            <td><strong>{{ facture.id }}</td></strong>
+        </tr>
+        <tr>
+            <th style="color: #0a6ebd">Price :</th>
+            <td><strong>{{ facture.prix }} dt </td></strong>
+        </tr>
+        <tr>
+            <th style="color: #0a6ebd">Description :</th>
+            <td style="color:#58b058"><strong>{{ facture.description }}</td></strong>
+        </tr>
+        <tr>
+            <th style="color: #0a6ebd" >Return Date :</th>
+            <td><strong>{% if facture.dateRemise %}{{ facture.dateRemise|date('Y-m-d H:i:s') }}{% endif %}</td></strong>
+        </tr>
+        <tr>
+            <th style="color: #0a6ebd; padding: 35px">__________________________________________________</th>
+        </tr>
+        {% endfor %}
+        <th style="color: #a1a8ae" >Thank you for your patience, see you soon!</th>
+
+
+     </tbody>
+    </table>
+</center>
+
+
+    {% endblock %}

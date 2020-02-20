@@ -1,19 +1,28 @@
 {% extends 'dashbase.html.twig' %}
 
 {% block content %}
-    <h1>Factures list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Prix</th>
-                <th>Description</th>
-                <th>Dateremise</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bills</h4>
+                        <p class="card-category">The list of bills</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Prix</th>
+                                    <th>Description</th>
+                                    <th>Date de Remise</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
         {% for facture in factures %}
             <tr>
                 <td><a href="{{ path('facture_show', { 'id': facture.id }) }}">{{ facture.id }}</a></td>
@@ -37,7 +46,17 @@
 
     <ul>
         <li>
-            <a href="{{ path('facture_new') }}">Create a new facture</a>
+            <a href="{{ path('facture_new') }}" class="btn btn-primary">Create a new bill</a>
+        </li>
+        <li>
+            <a href="{{ path('facture_pdf') }}" class="btn btn-primary">Generate pdf</a>
         </li>
     </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

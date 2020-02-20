@@ -9,3 +9,7 @@ reparation_homepage:
 reparation_facture:
     resource: "@ReparationBundle/Resources/config/routing/facture.yml"
     prefix:   /facture
+
+reparation_reparateur:
+    resource: "@ReparationBundle/Resources/config/routing/reparateur.yml"
+    prefix:   /reparateur

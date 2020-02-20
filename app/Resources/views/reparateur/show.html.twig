@@ -1,0 +1,68 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+<div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">{{ reparateur.id }}</h4>
+                            <p class="card-category">Reparateur id : {{ reparateur.id }} </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="">
+                                <table class="table">
+                                    <tbody>
+
+
+            <tr>
+                <th>Id</th>
+                <td>{{ reparateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ reparateur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ reparateur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Numtel</th>
+                <td>{{ reparateur.numTel }}</td>
+            </tr>
+            <tr>
+                <th>Experience</th>
+                <td>{{ reparateur.experience }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/images/' ~ reparateur.image) }}" style="height: 100px;width: 100px" alt="\"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reparateur_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }} ">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-primary" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

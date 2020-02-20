@@ -1,0 +1,34 @@
+reparateur_index:
+    path:     /
+    defaults: { _controller: "ReparationBundle:Reparateur:index" }
+    methods:  GET
+
+reparateur_show:
+    path:     /{id}/show
+    defaults: { _controller: "ReparationBundle:Reparateur:show" }
+    methods:  GET
+
+reparateur_new:
+    path:     /new
+    defaults: { _controller: "ReparationBundle:Reparateur:new" }
+    methods:  [GET, POST]
+
+reparateur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ReparationBundle:Reparateur:edit" }
+    methods:  [GET, POST]
+
+reparateur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ReparationBundle:Reparateur:delete" }
+    methods:  DELETE
+
+reparateur_frontshow:
+    path:     /{id}/frontshow
+    defaults: { _controller: "ReparationBundle:Reparateur:frontshow" }
+    methods:  GET
+
+reparateur_frontindex:
+    path:     /frontindex
+    defaults: { _controller: "ReparationBundle:Reparateur:frontindex" }
+    methods:  GET

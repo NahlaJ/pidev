@@ -1,30 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashbase.html.twig' %}
 
 {% block content %}
-    <head>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
 
-        table, td, th {
-            border: 1px solid black;
-        }
-        th, td {
-            border-bottom: 1px solid #ddd;
-        }
-    </style>
-    </head>
-   <center><h1>Repair Bike</h1>
-
-    <table >
-        <tbody>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bikes</h4>
+                        <p class="card-category">This is the broken bike</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ veloAReparer.id }}</td>
             </tr>
             <tr>
-                <th>Marque</th>
+                <th>Brand<th>
                 <td>{{ veloAReparer.marque }}</td>
             </tr>
             <tr>
@@ -32,7 +28,7 @@
                 <td>{{ veloAReparer.description }}</td>
             </tr>
             <tr>
-                <th>Probleme</th>
+                <th>Problem</th>
                 <td>{{ veloAReparer.probleme }}</td>
             </tr>
             <tr>
@@ -40,15 +36,15 @@
                 <td>{{ veloAReparer.age }}</td>
             </tr>
             <tr>
-                <th>Dater</th>
+                <th>Return date</th>
                 <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ veloAReparer.image }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ veloAReparer.image) }}"  style="height: 100px;width: 100px" alt="\" ></td>
             </tr>
         </tbody>
-    </table>
+                            </table>
 
     <ul>
         <li>
@@ -59,9 +55,16 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-primary" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
-   </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

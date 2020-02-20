@@ -15,6 +15,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    images_directory: '%kernel.project_dir%/web/uploads/images'
+
 
 framework:
     esi: ~
@@ -53,6 +55,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     cache: false
+    form_themes: ['bootstrap_4_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -84,3 +87,6 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+
+
