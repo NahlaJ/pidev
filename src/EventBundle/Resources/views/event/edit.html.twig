@@ -1,0 +1,58 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+    <br><br>  <h1>     EDIT EVENT</h1>
+    <center>
+        {{ form_start(edit_form) }}
+
+        <h6 style="margin-top: 20px">Nom</h6>
+        {{ form_widget(edit_form.nomevent) }}
+        <br>
+        <h6 style="margin-top: 20px">Description</h6>
+        {{ form_widget(edit_form.description) }}
+        <br>
+        <h6 style="margin-top: 20px">Date</h6>
+        {{ form_widget(edit_form.dateevent ) }}
+
+        <br>
+        <h6 style="margin-top: 20px">Place</h6>
+        {{ form_widget(edit_form.lieuevent ) }}
+
+        <br>
+        <h6 style="margin-top: 20px">Capacity</h6>
+        {{ form_widget(edit_form.capevent) }}
+
+        <br>
+        <h6 style="margin-top: 20px">Price</h6>
+        {{ form_widget(edit_form.ticketprice) }}
+
+        <br>
+        <h6 style="margin-top: 20px">Nbr Personne</h6>
+        {{ form_widget(edit_form.nbrepersonnes) }}
+
+        <br>
+        <h6 style="margin-top: 20px">Add an image</h6>
+        {{ form_widget(edit_form.eventImg, {'type' : 'file', 'attr' : {'class' : 'form-control', 'placeholder' : ' '}} ) }}
+
+        <div class="clearfix" style="margin-top: 20px"></div>
+        <br>
+        <input type="submit" value="Edit" />
+    </center>
+
+    {{ form_end(edit_form) }}
+
+
+
+    <center>
+        <ul>
+            <li>
+                <a href="{{ path('event_index') }}">Back to the list</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </center>
+{% endblock %}

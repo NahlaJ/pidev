@@ -1,0 +1,52 @@
+{% extends "dashbase.html.twig" %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="post-container">
+        <div class="row">
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="heading">
+                                <h1 class="section-title">Location</h1>
+                            </div>
+                        </div>
+                        {% for location in locations %}
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="featured-box">
+                                    <div class="content-wrapper">
+                                        <div class="feature-content">
+                                            <p class="listing-tagline">{{ location.id }}</p>
+                                            <div class="meta-tag">
+                                                <div class="user-name">
+                                                    <a href="#"><i class="lni-user"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="listing-bottom clearfix">
+                                            <div class="btn-group">
+                                                <a href="{{ path('location_show1Front',{'id': location.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

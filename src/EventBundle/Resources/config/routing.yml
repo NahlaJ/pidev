@@ -1,0 +1,40 @@
+event_reservationevent:
+    resource: "@EventBundle/Resources/config/routing/reservationevent.yml"
+    prefix:   /reservationevent
+
+event_homepage:
+    path:     /
+    defaults: { _controller: EventBundle:Default:index }
+
+event:
+    path:     /indexfront
+    defaults: { _controller: EventBundle:Event:indexfront}
+
+event_front:
+    path:     /showfront
+    defaults: { _controller: EventBundle:Event:showfront}
+
+get_event:
+    path:     /getEvent/{idevent}
+    defaults: { _controller: EventBundle:Event:getEvent }
+
+
+
+searchAjax:
+    path:     /searchAjax
+    defaults: { _controller: EventBundle:Event:searchAjax }
+
+event_event:
+    path:     /saveevent
+    defaults: { _controller: EventBundle:Event:saveevent}
+
+event_pdf:
+    path:     /pdf
+    defaults: { _controller: "EventBundle:Event:pdf" }
+    methods:  [GET, POST]
+
+event_users:
+    path:     /users
+    defaults: { _controller: EventBundle:Event:users}
+
+

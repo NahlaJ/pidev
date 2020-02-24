@@ -1,0 +1,61 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+    <h1 style="text-autospace: ideograph-alpha" >Event</h1>
+    <center>
+    <div class="col-md-4"></div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="margin-left: 45px; margin-top: 20px">
+        <div class="tile" style="width: 320px; height: 760px">
+            <div class="wrapper">
+                <div class="header"><strong>NAME  </strong>{{ event.nomEvent }}</div>
+
+                <div class="banner-img" style="width: 310px; height: 470px">
+
+                    <img src="{{ asset('images/' ~ event.eventImg) }}" alt="Image 1">
+                </div>
+
+
+
+                <div class="stats">
+
+                    <div>
+                        <strong>Capacity:  </strong> {{ event.capEvent }}
+                    </div>
+
+                    <div>
+                        <strong>JOINED:  </strong> {{ event.nbrePersonnes }}
+                    </div>
+
+                    <div>
+                        <strong>Price:  </strong> {{ event.ticketPrice }}
+                    </div>
+
+                    <div>
+                        <strong>Place:  </strong> {{ event.lieuevent }}
+                    </div>
+
+                    <div>
+                        <strong>Description:  </strong> {{ event.description }}
+                    </div>
+                </div>
+
+                <ul>
+                    <br>
+                        <a href="{{ path('event_index') }}">Back to the list</a>
+
+                    <br>
+                        <a href="{{ path('event_edit', { 'idevent': event.idevent }) }}">Update</a>
+
+                    <br>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    </center>
+
+{% endblock %}

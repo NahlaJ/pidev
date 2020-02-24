@@ -1,0 +1,39 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+    <div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">Edit the Bike </h4>
+                                </div>
+                                <table class="table">
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" class="btn btn-primary" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('veloR_index') }}" class="btn btn-primary" >Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-primary" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+{% endblock %}

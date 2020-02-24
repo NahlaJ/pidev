@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block content %}
+<div class="contact">
+    <div class="container">
+    <div class="product">
+    <div class="container">
+        <div class="ctnt-bar cntnt">
+            <div class="content-bar">
+                <div class="single-page">
+                    <div class="product-head">
+                        <a href="{{ path('indexFront') }}">Home</a> <span>::</span>
+                    </div>
+
+    <div class="row">
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+        <!-- Title -->
+        <h1 class="mt-4">{{ marque|upper }}</h1>
+        <!-- Author -->
+        <hr>
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="{{ asset('post/' ~ image) }}" alt="{{ id }}">
+        <hr>
+       <p class="lead">caracteristiques:  {{ caracteristiques }}</p>
+       <p class="lead">age:  {{ age }}</p>
+       <p class="lead">id:  {{ id }}</p>
+        <p class="lead">compteur:  {{ compteur }}</p>
+        </hr>
+    </div>
+    </div>
+    <!-- /.row -->
+
+    <li>
+        <div class="btn_form">
+            <a href="{{ path('location_new1',{'id' : velos.id}) }}">Louer</a>
+        </a>
+        </div>
+    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

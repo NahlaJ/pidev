@@ -1,0 +1,72 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <div class="product">
+        <div class="container">
+            <div class="ctnt-bar cntnt">
+                <div class="content-bar">
+                    <div class="single-page">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Velo</h1>
+
+                        <div class="product-head">
+                            <a href="{{ path('velo_index') }}">Home</a> <span>::</span>
+                        </div>
+                        <br>
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ velo.id }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ velo.marque }}</td>
+            </tr>
+            <tr>
+                <th>Caracteristiques</th>
+                <td>{{ velo.caracteristiques }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ velo.age }}</td>
+            </tr>
+            <tr>
+                <th>Compteur</th>
+                <td>{{ velo.compteur }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ velo.prix }}</td>
+            </tr>
+            <tr>
+                <img class="img-fluid rounded" src="{{ asset('post/' ~ velo.image) }}" alt="{{ velo.id }}">
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+
+        <li>
+            <div class="btn_form">
+            <a href="{{ path('velo_edit', { 'id': velo.id }) }}">Edit</a>
+            </div>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

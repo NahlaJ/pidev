@@ -1,0 +1,62 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Default:index }
+
+add:
+    path:     /add
+    defaults: { _controller: ArticleBundle:Article:add }
+
+addu:
+    path:     /addu
+    defaults: { _controller: ArticleBundle:Article:addu }
+
+liste:
+    path:     /liste
+    defaults: { _controller: ArticleBundle:Article:liste }
+
+listeu:
+    path:     /listeu
+    defaults: { _controller: ArticleBundle:Article:listeu }
+
+update:
+    path:     /update/{id}
+    defaults: { _controller: ArticleBundle:Article:update }
+
+updateu:
+    path:     /updateu/{id}
+    defaults: { _controller: ArticleBundle:Article:updateu }
+
+delete:
+    path:     /delete/{id}
+    defaults: { _controller: ArticleBundle:Article:delete }
+
+deleteu:
+    path:     /deleteu/{id}
+    defaults: { _controller: ArticleBundle:Article:deleteu }
+
+detailed:
+    path:     /detailed/{id}
+    defaults: { _controller: ArticleBundle:Article:detailed }
+
+detailedu:
+    path:     /detailedu/{id}
+    defaults: { _controller: ArticleBundle:Article:detailedu }
+
+addComment:
+    path:     /addComment/{id}
+    defaults: { _controller: ArticleBundle:Article:addComment }
+deleteComment:
+    path:     /deleteComment/{id}
+    defaults: { _controller: ArticleBundle:Article:deleteComment }
+
+deleteuComment:
+    path:     /deleteuComment/{id}
+    defaults: { _controller: ArticleBundle:Article:deleteuComment }
+
+search:
+    path:     /search
+    defaults: { _controller: ArticleBundle:Article:search }
+
+accepter:
+    path:     /accepter/{id}
+    defaults: { _controller: ArticleBundle:Article:accepter }

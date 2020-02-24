@@ -1,0 +1,81 @@
+{% extends "dashbase.html.twig" %}
+{% block content %}
+    <div class="post-container">
+        <br>
+        <br>
+        <br>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">notifications</i>
+                <span class="notification"></span>
+                <p class="d-lg-none d-md-block">
+                    Some Actions
+                </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ path('location_index1') }}">location</a>
+            </div>
+        </li>
+
+
+
+
+        <div class="row">
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="heading">
+                                <h1 class="section-title">Velo A Louer</h1>
+                            </div>
+                        </div>
+                        {% for velo in velos %}
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="featured-box">
+                                    <figure>
+                                        <a href="{{ path('velo_show',{'id': velo.id}) }}"><img class="img-fluid" src="{{ asset('post/' ~ velo.image) }}" alt=""></a>
+                                    </figure>
+                                    <div class="content-wrapper">
+                                        <div class="feature-content">
+                                            <p class="listing-tagline">{{ velo.marque }}</p>
+                                            <div class="meta-tag">
+                                                <div class="user-name">
+                                                    <a href="#"><i class="lni-user"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="listing-bottom clearfix">
+                                            <div class="btn-group">
+                                                <a href="{{ path('velo_edit',{'id': velo.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                <a href="{{ path('velo_show',{'id': velo.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+                                                {% if velo.etat==0 %}
+                                                <a href="{{ path('accepter',{'id': velo.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">confirmer</button></a>
+                                                {% else %}
+                                                    <a href="{{ path('accepter',{'id': velo.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">confirmer</button></a>
+                                                    {% endif %}
+                                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+        <ul>
+            <li>
+                <a href="{{ path('velo_new') }}">Create a new velo</a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="{{ path('velo_search') }}">recherche</a>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}

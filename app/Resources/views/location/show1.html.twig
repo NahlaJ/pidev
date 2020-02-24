@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <p class="center-block">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="contact">
+    <div class="container">
+        <div class="post-container">
+            <div class="row">
+                <section class="featured section-padding">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="heading">
+                                    <div class="product-head">
+                                        <a href="{{ path('indexFront') }}">Home</a> <span>::</span>
+                                    </div>
+
+    <h1>Location</h1>
+                                    <div class="content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-primary">
+                                                            <h4 class="card-title ">Simple Table</h4>
+    <p class="card-category"> Here is a subtitle for this table</p>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+                <thead class=" text-primary">
+            <table>
+           <tbody> <tr>
+                <th>Id</th>
+                <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{% if location.dateDebut %}{{ location.dateDebut|date('Y-m-d H:i:s')  }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{% if location.dateFin %}{{ location.dateFin|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+
+            <tr>
+                <th>Prix</th>
+                <td>{{ location.prix }}</td>
+            </tr>
+           </tbody>
+            </table>
+
+    <ul>
+        <li>
+            <div class="btn_form">
+            <a href="{{ path('location_edit', { 'id': location.id }) }}">Edit</a>
+            </div>
+
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

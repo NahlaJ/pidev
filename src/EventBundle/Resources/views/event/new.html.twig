@@ -1,0 +1,76 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style=" margin-bottom: 55px">
+            <div class="col-md-1"></div>
+    <div class="col-md-1" style="margin-top: 25px">
+
+    </div>
+            <div class="col-md-8" style="margin-top: 25px; background-color: #6a6a6a57; padding: 40px 180px">
+                <h1 style=" margin-bottom: 20px; font-size: 40px; text-align: center" >Add A New Event</h1>
+
+
+                {{ form_start(form) }}
+
+                <h6>Name</h6>
+                {{ form_widget(form.nomevent) }}
+                <span id="name_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="name_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+                <br>
+                <h6 style="margin-top: 20px">Description</h6>
+                {{ form_widget(form.description) }}
+                <span id="des_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="des_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+                <br>
+                <h6 style="margin-top: 20px">Date</h6>
+                {{ form_widget(form.dateevent ) }}
+                <span id="date_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="date_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+                <br>
+                <h6 style="margin-top: 20px">Place</h6>
+                {{ form_widget(form.lieuevent ) }}
+                <span id="place_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="place_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+                <br>
+                <h6 style="margin-top: 20px">Capacity</h6>
+                {{ form_widget(form.capevent) }}
+                <span id="cap_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="cap_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+                <br>
+                <h6 style="margin-top: 20px">Price</h6>
+                {{ form_widget(form.ticketprice) }}
+                <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+                <br>
+                <h6 style="margin-top: 20px">Nbr Personne</h6>
+                {{ form_widget(form.nbrepersonnes) }}
+                <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
+                <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
+                <br>
+                <h6 style="margin-top: 20px">Add an image</h6>
+                {{ form_widget(form.eventImg, {'type' : 'file', 'attr' : {'class' : 'form-control', 'placeholder' : ' '}} ) }}
+
+
+                <div class="clearfix" style="margin-top: 20px"></div>
+                <input type="submit" id="add_event" class="btn btn-primary btn-block" style="width: 50%; margin-left: 25%" value="Add">
+                <br>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('event_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+
+{% endblock %}

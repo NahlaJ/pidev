@@ -1,0 +1,38 @@
+location_velo:
+    resource: "@LocationBundle/Resources/config/routing/velo.yml"
+    prefix:   /velo
+location_location:
+    resource: "@LocationBundle/Resources/config/routing/location.yml"
+    prefix:   /location
+
+location_homepage:
+    path:     /
+    defaults: { _controller: LocationBundle:Default:index }
+
+indexFront:
+    path:     /indexFront
+    defaults: { _controller: LocationBundle:Velo:indexFront }
+new:
+    path:     /new
+    defaults: { _controller: LocationBundle:Velo:new }
+showFront:
+    path:     /showFront/{id}
+    defaults: { _controller: LocationBundle:Velo:showfront }
+new1:
+    path:     /new1
+    defaults: { _controller: LocationBundle:Location:new1 }
+show1:
+    path:     /show1
+    defaults: { _controller: LocationBundle:Location:show1 }
+show1Front:
+    path:     /show1Front/{id}
+    defaults: { _controller: LocationBundle:Location:show1Front }
+index1:
+    path:     /index1
+    defaults: { _controller: LocationBundle:Location:index1 }
+search:
+    path:     /search
+    defaults: { _controller: LocationBundle:Velo:search }
+accepter:
+    path:     /accepter/{id}
+    defaults: { _controller: LocationBundle:Velo:accepter }

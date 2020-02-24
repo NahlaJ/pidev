@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+  <th>  <br><h1>Event Details:</h1></th>
+
+    <br><center><table class="table table-striped" border="0">
+        <body>
+        <tr><th>
+            <th>Id Event</th>
+            <td>{{ event.idevent }}</td>
+        </tr>
+        <tr><th>
+            <th>Date Event</th>
+            <td>{{ event.dateevent }}</td>
+        </tr>
+        <tr><th>
+            <th>Lieu Event</th>
+            <td>{{ event.lieuevent }}</td>
+        </tr>
+        <tr><th>
+            <th>Nbre Personnes</th>
+            <td>{{ event.nbrepersonnes }}</td>
+        </tr>
+        <tr><th>
+            <th>Cap Event</th>
+            <td>{{ event.capevent }}</td>
+        </tr>
+        <tr><th>
+            <th>Nom Event</th>
+            <td>{{ event.nomevent }}</td>
+        </tr>
+        <tr><th>
+            <th>Description</th>
+            <td>{{ event.description }}</td>
+        </tr>
+        <tr><th>
+            <th>Ticket Price</th>
+            <td>{{ event.ticketprice }}</td>
+        </tr>
+        <tr><th>
+            <th>Event Img</th>
+            <td>{{ event.eventImg }}</td>
+        </tr>
+        </body>
+    </table>
+
+    <ul>
+
+        <li>
+
+            <br><a href=" path('reservationevent_saveevent') }}">Participate</a><br>
+
+        </li>
+</center>
+    </ul>
+{% endblock %}

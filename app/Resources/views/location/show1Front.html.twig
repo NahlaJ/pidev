@@ -1,0 +1,58 @@
+{% extends "dashbase.html.twig" %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <p class="lead"><a href="{{ path('index1') }}">Home</a></p>
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4"></h1>
+            <!-- Author -->
+            <!-- Preview Image -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">{{ id }}</h4>
+                                    <p class="card-category"></p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+            <hr>
+            <p class="lead">Date Debut :     {{ dateDebut|date }}</p>
+            <p class="lead">Date Fin :       {{ DateFin|date }}</p>
+            <p class="lead">Prix :      {{ prix }}</p>
+            <p class="lead">Id User :      {{ location.user }}</p>
+            <p class="lead">Marque Velo :      {{ location.velo.marque }}</p>
+
+
+
+
+            </hr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

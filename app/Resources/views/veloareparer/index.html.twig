@@ -1,0 +1,90 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bikes</h4>
+                        <p class="card-category">The list of broken bikes</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Brand</th>
+                                    <th>Description</th>
+                                    <th>Problem</th>
+                                    <th>Age</th>
+                                    <th>Return Date</th>
+                                    <th>Repairer</th>
+                                    <th>Bike</th>
+                                    <th>Status</th>
+
+                                </tr>
+                                </thead>
+
+        <tbody>
+        {% for veloAReparer in veloAReparers %}
+            <p>
+                <td><a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">{{ veloAReparer.id }}</a></td>
+                <td>{{ veloAReparer.marque }}</td>
+                <td>{{ veloAReparer.description }}</td>
+                <td>{{ veloAReparer.probleme }}</td>
+                <td>{{ veloAReparer.age }}</td>
+                <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {% if veloAReparer.reparateur %}
+                    <td><img src=" {{ asset('uploads/images/' ~ veloAReparer.reparateur.image) }}" style="height: 100px;width: 100px" ></td>
+
+                {% else  %}
+                    <td></td>
+                    {% endif %}
+                <td><img src="{{ asset('uploads/images/' ~ veloAReparer.image) }}" style="height: 100px;width: 100px"></td>
+                {% if veloAReparer.status == "Unaffected" %}
+
+                <td><p style="color:#ff3d00";>{{ veloAReparer.status }}</td></p>
+                 {% elseif veloAReparer.status == "Work in progress" %}
+                     <td><p style="color:#5e35b1";>{{ veloAReparer.status }}</td></p>
+                     {% else %}
+                         <td><p style="color:#51A351";>{{ veloAReparer.status }}</td></p>
+                         {% endif %}
+                         <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('veloR_show', { 'id': veloAReparer.id }) }}">Show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">Edit</a>
+
+                        </li>
+                        {% if veloAReparer.reparateur == null %}
+                        <li>
+                            <a href="{{ path('veloR_affect', { 'id': veloAReparer.id }) }}">Affect</a>
+                        </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ path('veloR_end_Rep', { 'id': veloAReparer.id }) }}">End Task</a>
+
+                                </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

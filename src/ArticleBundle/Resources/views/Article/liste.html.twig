@@ -1,0 +1,158 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ArticleBundle:Article:add{% endblock %}
+
+{% block content %}
+
+
+
+            <div class="contact">
+                <div class="container">
+
+    <h2>Search A Post !!</h2>
+
+    <div class="sidebar-search">
+
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="search" class="form-control" placeholder="Search here">
+        </div>
+        <!-- /input-group -->
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="search"> Entities<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" id="entitiesNav">
+            </ul>
+        </li>
+    </ul><br><br><br><br>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'articles') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                entitySelector.append('<li><b>'+value[1]+'</b><a href="detailed/'+id+'">'+'<img src="post/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <div class="post-container">
+        <div class="row">
+
+
+            <section class="featured section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="heading">
+                                <h1 class="section-title">Latest Posts</h1>
+                                <h4 class="sub-title">You can also post your own thoughts</h4>
+                            </div>
+                        </div>
+
+                        {% for articles in articles %}
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+                                <div class="featured-box">
+                                    <figure>
+
+                                        <h4><a href="{{ path('detailed',{'id': articles.id}) }}">{{ articles.titre }}</a></h4>
+                                        <a href="{{ path('detailed',{'id': articles.id}) }}"><img class="img-fluid" src="{{ asset('post/' ~ articles.photo) }}" alt=""></a>
+                                    </figure>
+                                    <div class="content-wrapper">
+                                        <div class="feature-content">
+
+                                            <p class="listing-tagline">{{ articles.description|raw }}</p>
+                                            <div class="meta-tag">
+                                                <div class="listing-review">
+                                                    <span class="review-avg"></span>
+
+                                                </div>
+                                                <div class="user-name">
+                                                    <a href="#"><i class="lni-user"></i></a>
+                                                </div>
+                                                <div class="listing-category">
+                                                    <a href="#"><i class="lni-alarm-clock"></i>{{ articles.date|date() }} </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="listing-bottom clearfix">
+                                            <div class="btn-group">
+
+
+                                                <a href="{{ path('detailed',{'id': articles.id}) }}"><button type="button" class="btn btn-sm btn-outline-primary">View</button></a>
+                                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                {% if(articles.user.id== app.user.id) %}
+                                                <a href="{{ path('update',{'id': articles.id}) }}"><button type="button" class="btn btn-sm btn-outline-info">Update</button></a>
+                                                <a href="{{ path('delete',{'id': articles.id}) }}"><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+                                                {% else %}
+
+
+                                                {% endif %}
+                                                {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                                                    <br>
+
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </section>
+            <div class="navigation">
+                {{ knp_pagination_render(articles) }}
+            </div>
+
+
+        </div>
+
+    </div>
+    </div>
+            </div>
+
+
+
+ {% endblock %}
+
+

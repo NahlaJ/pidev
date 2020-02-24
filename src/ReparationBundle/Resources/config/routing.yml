@@ -1,0 +1,15 @@
+reparation_veloR:
+    resource: "@ReparationBundle/Resources/config/routing/veloareparer.yml"
+    prefix:   /veloR
+
+reparation_homepage:
+    path:     /
+    defaults: { _controller: ReparationBundle:Default:index }
+
+reparation_facture:
+    resource: "@ReparationBundle/Resources/config/routing/facture.yml"
+    prefix:   /facture
+
+reparation_reparateur:
+    resource: "@ReparationBundle/Resources/config/routing/reparateur.yml"
+    prefix:   /reparateur

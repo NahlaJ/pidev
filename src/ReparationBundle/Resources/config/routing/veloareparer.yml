@@ -1,0 +1,32 @@
+veloR_index:
+    path:     /
+    defaults: { _controller: "ReparationBundle:VeloAReparer:index" }
+    methods:  GET
+
+veloR_show:
+    path:     /{id}/show
+    defaults: { _controller: "ReparationBundle:VeloAReparer:show" }
+    methods:  GET
+
+veloR_new:
+    path:     /new
+    defaults: { _controller: "ReparationBundle:VeloAReparer:new" }
+    methods:  [GET, POST]
+
+veloR_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ReparationBundle:VeloAReparer:edit" }
+    methods:  [GET, POST]
+
+veloR_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ReparationBundle:VeloAReparer:delete" }
+    methods:  DELETE
+veloR_affect:
+    path:     /affect/{id}
+    defaults: { _controller: "ReparationBundle:VeloAReparer:affect" }
+    methods:  [GET, POST]
+veloR_end_Rep:
+    path:     /endRep/{id}
+    defaults: { _controller: "ReparationBundle:VeloAReparer:endRep" }
+    methods:  [GET, POST]

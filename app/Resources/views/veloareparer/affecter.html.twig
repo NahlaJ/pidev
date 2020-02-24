@@ -1,0 +1,40 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+
+<html>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Affect</h4>
+                        <p class="card-category">Here is the list of the available Repairers</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <body>
+
+                            <table class="table">
+
+        <form method="post">
+            <select name="rep" class="col-md-12">
+                {% for reparateur in reps %}
+                        <option value="{{ reparateur.id }}">{{ reparateur.nom }}</option>
+                {% endfor %}
+            </select>
+           <br> <input type="submit" class="btn btn-primary" value="Affect" >
+        </form>
+                            </table>
+    </body>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+{% endblock %}

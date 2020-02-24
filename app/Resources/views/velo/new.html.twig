@@ -1,0 +1,51 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+<div class="caption">
+    <div class="slider">
+        <div class="callbacks_container">
+        <div class="post-container">
+            <div class="row"> <center>
+                <section class="featured section-padding">
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="heading">
+
+    <h1>Velo creation</h1>
+
+    <div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+
+        </div>
+    </div>
+</div>
+    <ul>
+        <li>
+            <a href="{{ path('velo_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section></center>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

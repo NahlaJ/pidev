@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reservationevents list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idevent</th>
+                <th>Idclient</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservationevent in reservationevents %}
+            <tr>
+                <td><a href="{{ path('reservationevent_show', { 'id': reservationevent.id }) }}">{{ reservationevent.id }}</a></td>
+                <td>{{ reservationevent.idEvent }}</td>
+                <td>{{ reservationevent.idClient }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reservationevent_show', { 'id': reservationevent.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reservationevent_edit', { 'id': reservationevent.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reservationevent_new') }}">Create a new reservationevent</a>
+        </li>
+    </ul>
+{% endblock %}

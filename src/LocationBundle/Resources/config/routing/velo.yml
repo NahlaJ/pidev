@@ -1,0 +1,38 @@
+velo_index:
+    path:     /
+    defaults: { _controller: "LocationBundle:Velo:index" }
+    methods:  GET
+
+velo_indexFront:
+    path:     /
+    defaults: { _controller: "LocationBundle:Velo:indexFront" }
+    methods:  GET
+
+velo_show:
+    path:     /{id}/show
+    defaults: { _controller: "LocationBundle:Velo:show" }
+    methods:  GET
+
+velo_showFront:
+    path:     /{id}/showFront
+    defaults: { _controller: "LocationBundle:Velo:showFront" }
+    methods:  GET
+
+velo_new:
+    path:     /new
+    defaults: { _controller: "LocationBundle:Velo:new" }
+    methods:  [GET, POST]
+
+velo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "LocationBundle:Velo:edit" }
+    methods:  [GET, POST]
+
+velo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "LocationBundle:Velo:delete" }
+    methods:  DELETE
+velo_search:
+    path:     /search
+    defaults: { _controller: "LocationBundle:Velo:search" }
+    methods: [GET, POST]

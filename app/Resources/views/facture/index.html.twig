@@ -1,0 +1,62 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bills</h4>
+                        <p class="card-category">The list of bills</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Prix</th>
+                                    <th>Description</th>
+                                    <th>Date de Remise</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td><a href="{{ path('facture_show', { 'id': facture.id }) }}">{{ facture.id }}</a></td>
+                <td>{{ facture.prix }}</td>
+                <td>{{ facture.description }}</td>
+                <td>{% if facture.dateRemise %}{{ facture.dateRemise|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('facture_show', { 'id': facture.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('facture_edit', { 'id': facture.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('facture_new') }}" class="btn btn-primary">Create a new bill</a>
+        </li>
+        <li>
+            <a href="{{ path('facture_pdf') }}" class="btn btn-primary">Generate pdf</a>
+        </li>
+    </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

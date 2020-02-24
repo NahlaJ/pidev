@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="contact">
+        <div class="container">
+<div class="post-container">
+    <div class="row">
+        <section class="featured section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="heading">
+                            <div class="product-head">
+                                <a href="{{ path('indexFront') }}">Home</a> <span>::</span>
+                            </div>
+
+                            <div class="heading">
+                                <h1 class="section-title">Louer Maintenant</h1>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+                            <br>
+                            <br>
+                            <br>
+        <input type="submit" value="Create" href="{{ path('show1') }}" />
+    {{ form_end(form) }}
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

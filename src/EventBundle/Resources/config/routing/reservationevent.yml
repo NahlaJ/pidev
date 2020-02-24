@@ -1,0 +1,24 @@
+reservationevent_index:
+    path:     /
+    defaults: { _controller: "EventBundle:Reservationevent:index" }
+    methods:  GET
+
+reservationevent_show:
+    path:     /{id}/show
+    defaults: { _controller: "EventBundle:Reservationevent:show" }
+    methods:  GET
+
+reservationevent_new:
+    path:     /new
+    defaults: { _controller: "EventBundle:Reservationevent:new" }
+    methods:  [GET, POST]
+
+reservationevent_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "EventBundle:Reservationevent:edit" }
+    methods:  [GET, POST]
+
+reservationevent_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "EventBundle:Reservationevent:delete" }
+    methods:  DELETE

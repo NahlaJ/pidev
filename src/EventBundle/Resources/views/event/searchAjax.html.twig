@@ -1,0 +1,104 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block Title %}
+    Event
+{% endblock %}
+
+{% block body %}
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script src="{{ asset("https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js") }}"></script>
+        <script src={{ asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js") }}></script>
+        <link href=" {{ asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css") }} " rel="stylesheet" />
+    </head>
+    <div class="container">
+        <br />
+        <h2 align="center">Search Event By Name</h2><br />
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" name="search_text" id="search_text" style="width : 280px" placeholder="Search" class="form-control" />
+            </div>
+        </div>
+
+        <br />
+        <form>
+            <div id="result">
+            </div>
+
+        </form>
+
+
+    </div>
+    <script type="text/javascript" src="{{ asset('js/jquery-2.2.3.min.js') }}">
+    </script>
+    <script  type="text/javascript" >
+        $(document).ready(function () {
+            $('#search_text').keyup(function(){
+                var search = $('#search_text').val();
+                $.ajax({
+                    url:"{{ path('event_searchAjax') }}",
+                    type:'POST',
+                    data:{'nomevent':search},
+
+                    success:function(data)
+                    {
+
+                        if(search!=""){
+                            console.log('cv');
+
+                            var output =
+                                "<div class='table-responsive'>"+
+                                "<table id='tab' class='table table bordered'>"+
+                                "<tr style='color: saddlebrown'>"+
+                                "<th>"+"Event"+"</th>"+
+                                "<th>"+"Description"+"</th>"+
+                                "<th>"+"Date"+"</th>"+
+                                "<th>"+"Ticket Price"+"</th>"+
+                                "<th>"+"Action";
+                            $.each(data,function(key,val){
+                                var id=val.idevent;
+                                var path = '{{ path('event_edit', { 'idevent': 'x' }) }}'
+                                path = path.replace("x",id);
+                                console.log(id);
+
+
+
+                                output+=
+                                    "<a href=''>"+
+                                    "<tr >"+
+                                    "<td style='color: darkorange'>"+val.nomevent+
+                                    "<td>"+val.description+ "</td>"+
+                                    "<td>"+val.dateevent+"</td>"+
+                                    "<td>"+val.ticketprice+"</td>"+
+                                    "<td><a href='"+ path + "'>Update</a></td>"
+                                "</td>"
+
+                                "</tr> visit </a>";
+
+
+
+
+
+
+
+                            });
+                            output+="<ul>";
+                            $("#result").html(output);
+
+                        }
+                        else{
+                            $('#result').html("");
+                        }
+                    }
+
+                });});});
+
+
+    </script>
+{% endblock %}
+

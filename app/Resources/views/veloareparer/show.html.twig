@@ -1,0 +1,79 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Bikes</h4>
+                        <p class="card-category">This is the broken bike</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ veloAReparer.id }}</td>
+            </tr>
+            <tr>
+                <th>Brand<th>
+                <td>{{ veloAReparer.marque }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ veloAReparer.description }}</td>
+            </tr>
+            <tr>
+                <th>Problem</th>
+                <td>{{ veloAReparer.probleme }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ veloAReparer.age }}</td>
+            </tr>
+            <tr>
+                <th>Return date</th>
+                <td>{% if veloAReparer.dateR %}{{ veloAReparer.dateR|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <th>Status</th>
+            {% if veloAReparer.status == "Unaffected" %}
+
+                <td><p style="color:#ff3d00";>{{ veloAReparer.status }}</td></p>
+            {% elseif veloAReparer.status == "Work in progress" %}
+                <td><p style="color:#5e35b1";>{{ veloAReparer.status }}</td></p>
+            {% else %}
+                <td><p style="color:#51A351";>{{ veloAReparer.status }}</td></p>
+            {% endif %}
+            <tr>
+                <th></th>
+                <td><img src="{{ asset('uploads/images/' ~ veloAReparer.image) }}"  style="height: 100px;width: 100px" alt="\" ></td>
+            </tr>
+        </tbody>
+                            </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('veloR_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('veloR_edit', { 'id': veloAReparer.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-primary" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

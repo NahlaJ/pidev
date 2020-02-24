@@ -1,0 +1,59 @@
+{% extends 'dashbase.html.twig' %}
+
+{% block content %}
+<div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">{{ facture.id }}</h4>
+                        <p class="card-category">Facture id : {{ facture.id }} </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="">
+                            <table class="table">
+                                <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ facture.id }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ facture.prix }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ facture.description }}</td>
+            </tr>
+            <tr>
+                <th>Date De Remise</th>
+                <td>{% if facture.dateRemise %}{{ facture.dateRemise|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('facture_index') }}" class="btn btn-primary">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('facture_edit', { 'id': facture.id }) }}" class="btn btn-primary">Edit</a>
+        </li>
+
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-primary" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

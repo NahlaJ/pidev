@@ -1,0 +1,140 @@
+{% extends 'dashbase.html.twig' %}
+
+
+{% block content %}
+
+
+    <div>
+        <center style="margin-bottom: 40px">
+
+            <div class="container" >
+                <br />
+                <h2 align="center"></h2><br />
+
+                <br />
+                <form>
+                    <div id="result">
+                    </div>
+
+                </form>
+
+
+                <div class="card-header card-header-primary">
+                    <br>  <center> <h2 class="card-title ">Participant List</h2></center>
+
+
+                    <br> <table class="purpleHorizon" border="2">
+                        <head>
+
+                            <th>Id Event</th>
+                            <th>Event Name</th>
+                            <th>Id User</th>
+                            <th>User Name</th>
+                            <th>Last Login</th>
+                            <th>User Email</th>
+                        </head>
+                        <body>
+
+
+                        {% for e in events %}
+
+                            {% for u in paricipants %}
+                            <tr>
+                            <td>{{ e.idevent }}</td>
+                            <td>{{ e.nomevent }}</td>
+
+                                    <td>{{ u.id }}</td>
+                                    <td>{{ u.username }}</td>
+                                    <td>{{ u.lastlogin|date }}</td>
+                                    <td>{{ u.email }}
+                                </tr>
+                            {% endfor %}
+                            {% endfor %}
+                        </body>
+                    </table>
+                </div></div></center></div>
+
+
+
+<br><br><br>
+
+<style>
+    table.purpleHorizon {
+        border: 4px solid #e2a7ff;
+        background-color: #83847a;
+        width: 350px;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    table.purpleHorizon td, table.purpleHorizon th {
+        border: 1px solid #becbc1;
+        padding: 5px 2px;
+    }
+    table.purpleHorizon tbody td {
+        font-size: 13px;
+        font-weight: bold;
+        color: #1d1d1d;
+    }
+    table.purpleHorizon tr:nth-child(even) {
+        background: #e2a7ff;
+    }
+    table.purpleHorizon thead {
+        background: #856c96;
+        border-bottom: 4px solid #e2a7ff;
+    }
+    table.purpleHorizon thead th {
+        font-size: 19px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: left;
+        border-left: 2px solid #792396;
+    }
+    table.purpleHorizon thead th:first-child {
+        border-left: none;
+    }
+
+    table.purpleHorizon tfoot {
+        font-size: 13px;
+        font-weight: bold;
+        color: rgba(21, 21, 21, 0.26);
+        background: #e2a7ff;
+        background: -moz-linear-gradient(top, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
+        background: -webkit-linear-gradient(top, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
+        background: linear-gradient(to bottom, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
+        border-top: 5px solid #e260e2;
+    }
+    table.purpleHorizon tfoot td {
+        font-size: 15px;
+    }
+    table.purpleHorizon tfoot .links {
+        text-align: right;
+    }
+    table.purpleHorizon tfoot .links a{
+        display: inline-block;
+        background: #e2a7ff;
+        color: #1d1d1d;
+        padding: 2px 8px;
+        border-radius: 5px;
+    }
+    /* * { margin: 0px; padding: 0px; }*/
+    body {
+
+
+        background: #bbc8be;}
+
+    .bgborder {
+        display: block;
+        width: 5px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        background-color: attr(data-color color);
+    }
+
+    #borderDemo {
+        border: 5px double rgba(164,81,160,0.68);
+        border-radius: 17px 18px 20px 24px;
+    }
+
+
+    {% endblock %}

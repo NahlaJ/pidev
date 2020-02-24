@@ -1,0 +1,106 @@
+{% extends "dashbase.html.twig" %}
+
+
+{% block title %}details{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+
+
+    <div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+    <!-- Title -->
+    <h1 class="mt-4">{{ titre|upper }}</h1>
+
+    <!-- Author -->
+    <p class="lead"><a href="{{ path('listeu') }}">Home</a></p>
+
+    <hr>
+
+    <!-- Date/Time --><p>{{ date|date }}</p>
+
+    <hr>
+
+    <!-- Preview Image -->
+    <img class="img-fluid rounded" src="{{ asset('post/' ~ photo) }}" alt="{{ titre }}">
+
+    <hr>
+
+    <!-- Post Content -->
+    <p class="lead">{{ descripion|raw }}</p>
+
+
+
+    </hr>
+
+
+
+        {% for commentaire in articles.commentaires %}
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">{{ commentaire.getUser().getUsername() }}</h5>
+                <p>{{ commentaire.getTexte() }}</p>
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Delete
+                    </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Alert </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Do you really want to delete your comment ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="{{ path('deleteuComment',{'id': commentaire.id}) }}"><button type="button" class="btn btn-primary">Delete Comment</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <br>
+
+
+
+            </div>
+            {% endfor %}
+
+        <!-- Comment with nested comments -->
+
+
+    </div>
+    <br><br><br><br><br>
+
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
+
+        <!-- Search Widget -->
+
+
+
+
+
+    </div>
+    </div>
+
+    <!-- /.row -->
+
+
+
+{% endblock %}
