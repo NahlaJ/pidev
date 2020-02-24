@@ -1,0 +1,6 @@
+shop_homepage:
+    path:     /
+    defaults: { _controller: ShopBundle:Default:index }
+show:
+    path:     /show
+    defaults: { _controller: ShopBundle:commande:show }

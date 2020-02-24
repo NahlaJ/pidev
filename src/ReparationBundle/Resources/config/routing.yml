@@ -1,0 +1,3 @@
+reparation_homepage:
+    path:     /
+    defaults: { _controller: ReparationBundle:Default:index }
