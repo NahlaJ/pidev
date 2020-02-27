@@ -1,3 +1,5 @@
 catalogue_homepage:
-    path:     /
+    path:     /categorie
     defaults: { _controller: CatalogueBundle:Default:index }
+
+

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        #response {
+            display:none;
+            color: #255625;
+            padding: 10 20px;
+            background: #c0efc0;
+            border: #aadeab 1px solid;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <br>
+    <br>
+    <div class="text-center">
+        <div id="response"></div>
+        <div id="paypal-button"></div>
+    </div>
+    <br>
+    <br>
+{% endblock %}
+
+{% block javascripts%}
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'production',
+        client: {
+            production: 'AVM5lW2CGwvK-WDVc_JYiGE7_6ZOnG6X-ZInV9Wwis2A4Ka2W8Z0Rfo4ocBjd3R-GPwv7GLAMvCl_I9C'
+        },
+        // Set up a payment
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: '{{ app.session.get('prixfinal') }}',
+                            currency: 'EUR'
+                        }
+                    }]
+                });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function() {
+                    window.location.replace('{{ path('shop_order') }}')
+                });
+            }
+        }, '#paypal-button');
+    </script>
+{% endblock %}

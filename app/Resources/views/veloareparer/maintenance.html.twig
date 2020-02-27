@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <div class="product">
+        <div class="container">
+            <div class="ctnt-bar cntnt">
+                <div class="content-bar">
+                    <div class="single-page">
+                        <div class="product-head">
+                            <a href="{{ path('reparateur_frontindex') }}">Go to the Repairers List</a>
+                        </div>
+
+                        <link rel="stylesheet" href ="{{ asset('css/etalage.css')}}">
+
+                        {% for veloAReparer in veloAReparers %}
+                            {% if veloAReparer.User != null  %}
+{% if veloAReparer.User.username == app.user.username %}
+    <center>
+                        <p class="details-left-slider">
+                            <div class="grid images_3_of_2">
+
+                                        <a href="#">
+                                            <img src="{{ asset('uploads/images/' ~ veloAReparer.image) }}" width="400" height="300"  />
+                                        </a>
+
+                            </div>
+                            <p class="desc"> This is your broken bike!</p>
+
+
+        <td> <h2><i style="color: indianred">Brand : </i> {{ veloAReparer.marque }}</h2></td>
+        <td><h2><i style="color: indianred">Description : </i>{{ veloAReparer.description }}</h2></td>
+                           <h2> <td><i style="color: indianred">Issue : </i>  {{ veloAReparer.probleme }}</td></h2>
+
+
+                            <div class="bike-type">
+                                <p>Your bike's age: <td>{{ veloAReparer.age }}</td> years</p>
+                                {% if veloAReparer.status == "Unaffected" %}
+                                    <p>STATUS : </p>
+
+                                    <td><p style="color:#ff3d00";>{{ veloAReparer.status }}</td></p>
+                                {% elseif veloAReparer.status == "Work in progress" %}
+                                    <td><p style="color:#5e35b1";>{{ veloAReparer.status }}</td></p>
+                                {% else %}
+                                    <td><p style="color:#51A351";>{{ veloAReparer.status }}</td></p>
+                                    {% if veloAReparer.facture != null %}
+
+                                        <br><a href="{{ path('facture_check', { 'id': veloAReparer.facture.id }) }}">Check Bill</a></p>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            <h5>Thank you for visiting us!</h5>
+                        </div>
+                        <div class="clearfix"></div>
+    </center>
+    <br><br><br><br>
+                        {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% else %}
+    <center><strong><p style="font-size: 50px"> Please LOGIN or SIGN UP </p></strong></center>
+
+{% endif %}
+
+
+{% endblock %}

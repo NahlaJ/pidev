@@ -1,51 +1,119 @@
 {% extends 'dashbase.html.twig' %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8001/event/">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block content %}
-    <br>
-    <br>
-    <br>
-<div class="caption">
-    <div class="slider">
-        <div class="callbacks_container">
-        <div class="post-container">
-            <div class="row"> <center>
-                <section class="featured section-padding">
-                    <div class="container">
-
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <div class="heading">
-
-    <h1>Velo creation</h1>
-
-    <div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
 
     {{ form_start(form) }}
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title">New</h4>
+                                    <p class="card-category">Ajouter un nouvel velo</p>
+                                </div>
+                                <div class="card-body">
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                                    <form>
 
+                                        <input type="submit"  class="btn btn-primary pull-right" value="Create" />
 
-        </div>
-    </div>
-</div>
-    <ul>
-        <li>
-            <a href="{{ path('velo_index') }}">Back to the list</a>
-        </li>
-    </ul>
+                                    </form>    {{ form_end(form) }}
+
 
                                 </div>
+                                <center>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('velo_index') }}"><img src="{{ asset('images/back.png') }}" width="50" height="50"></a>
+                                    </li>
+                                </ul>
+                                </center>
                             </div>
                         </div>
+
                     </div>
-                </section></center>
+                </div>
             </div>
-        </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

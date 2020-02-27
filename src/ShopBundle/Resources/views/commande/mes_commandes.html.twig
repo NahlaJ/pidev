@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+    <h2>Historique de mes Commandes : </h2>
+
+   <table class="table">
+       <thead>
+       <tr>
+           <th>Date Commande</th>
+           <th>Prix</th>
+           <th>Status</th>
+
+
+
+       </tr>
+       </thead>
+   <tbody>
+{% for c in commandes %}
+   <tr>
+       <td>{{ c.dateCommande | date('d-m-yy') }}</td>
+       <td>{{ c.totale}}</td>
+       <td>{{ c.status }}</td>
+       <td>
+       <button class="btn btn-xs btn-success">
+           <i class="ace-icon fa fa-check bigger-120"></i>
+           <a  href="{{ path('maCommande', {'id' : c.id}) }}" class="btn"><p>Consulter</p> </a>
+       </td>
+       </button>
+   </tr>
+   {% endfor %}
+   </tbody>
+   </table>
+    <br>
+    <br>
+    <form method="get" >
+        <input hidden value="TELECHARGER_PDF" name="TELECHARGER_PDF">
+        <input value="TELECHARGER_PDF" type="submit" class="add-to-cart btn btn-default" >
+    </form>
+    <br>
+
+{% endblock %}

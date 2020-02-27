@@ -1,16 +1,114 @@
 {% extends "dashbase.html.twig" %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8001/event/">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block title %}ArticleBundle:Article:add{% endblock %}
 
 {% block content %}
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Update Article</h1>
     {{ form_start(form) }}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Edit Profile</h4>
+                            <p class="card-category">Complete your profile</p>
+                        </div>
+                        <div class="card-body">
+                            {{ form_widget(form) }}
+                            <form>
+
+                                <input type="submit"  class="btn btn-primary pull-right" value="Create" />
+
+                            </form>
+                            {{ form_end(form) }}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
-    {{ form_end(form) }}
 {% endblock %}

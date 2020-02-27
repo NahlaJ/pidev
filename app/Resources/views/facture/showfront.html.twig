@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <div class="product">
+            <div class="container">
+                <div class="ctnt-bar cntnt">
+                    <div class="content-bar">
+                        <div class="single-page">
+                            <div class="product-head">
+                                <a href="{{ path('veloR_single') }}">Go to your bikes</a>
+                            </div>
+                            <tbody>
+
+                            <center>
+
+                            <table>
+                                <p class="details-left-slider">
+
+                                <p class="desc"> This is your bill!</p>
+                                <tr>
+                                    <th style="color: #0a6ebd; padding: 35px">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</th>
+                                </tr>
+
+
+                                <tr>
+                                    <th style="color: #0a6ebd" >Bike's ID</th>
+                                    <td><strong>{{ facture.veloAReparer.id }}</td></strong>
+                                </tr>
+                              <tr>
+                                        <th style="color: #0a6ebd" >Id :</th>
+                                        <td><strong>{{ facture.id }}</td></strong>
+                                    </tr>
+                                    <tr>
+                                        <th style="color: #0a6ebd">Price :</th>
+                                        <td><strong>{{ facture.prix }} dt </td></strong>
+                                    </tr>
+                                    <tr>
+                                        <th style="color: #0a6ebd">Description :</th>
+                                        <td style="color:#58b058"><strong>{{ facture.description }}</td></strong>
+                                    </tr>
+                                    <tr>
+                                        <th style="color: #0a6ebd" >Return Date :</th>
+                                        <td><strong>{% if facture.dateRemise %}{{ facture.dateRemise|date('Y-m-d H:i:s') }}{% endif %}</td></strong>
+                                    </tr>
+
+
+                                <h5>Thank you for visiting us!</h5>
+
+                                <a href="{{ path('facture_pdf', { 'id': facture.id }) }}" class="btn btn-primary">Generate pdf</a>
+
+                                <tr>
+                                    <th style="color: #0a6ebd; padding: 35px">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</th>
+                                </tr>
+                        <div class="clearfix"></div>
+
+                                </tbody>
+                            </center>
+
+                            </table>
+                                                  <br><br><br><br>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+    {% else %}
+        <center><strong><p style="font-size: 50px"> Please LOGIN or SIGN UP </p></strong></center>
+
+    {% endif %}
+
+    {% endblock %}

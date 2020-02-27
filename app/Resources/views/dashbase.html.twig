@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Material Dashboard by Creative Tim
+        Cycle Corporation
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -18,9 +18,17 @@
     <link href="{{ asset('css/material-dashboard.css') }}?v=2.1.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('demo/demo.css" rel="stylesheet') }}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/fonts/line-icons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/slicknav.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/responsive.css')}}">
 </head>
 
 <body class="">
+
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="img/sidebar-1.jpg">
         <!--
@@ -29,43 +37,46 @@
           Tip 2: you can also add an image using data-image tag
       -->
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Creative Tim
+            <a href="{{ asset('promo/menu') }}" class="simple-text logo-normal">
+                Cycle Corporation
             </a>
         </div>
+        {% block nav %}
+
         <div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="nav-item active  ">
-                    <a class="nav-link" href="./dashboard.html">
-                        <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./user.html">
+                <li class="nav-item  ">
+                    <a class="nav-link" href="{{ asset('categorie') }}">
                         <i class="material-icons">person</i>
-                        <p>User Profile</p>
+                        <p>Categories</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="http://localhost/sprint1/web/app_dev.php/event/">
+                    <a class="nav-link" href="{{ asset('produit') }}">
                         <i class="material-icons">content_paste</i>
+                        <p>Products</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ asset('promo') }}">
+                        <i class="material-icons">library_books</i>
+                        <p>Promo</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('show_commandes')}}">
+                        <i class="material-icons">bubble_chart</i>
+                        <p>Commandes</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ asset('event') }}">
+                        <i class="material-icons">bubble_chart</i>
                         <p>Events</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <form method="post" action="{{ path("event_users") }}">
-                <li><input type="submit" value="users" ></li>
-                </form>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./icons.html">
-                        <i class="material-icons">bubble_chart</i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ path('new') }}">
+                    <a class="nav-link" href="{{ path('velo_index') }}">
                         <i class="material-icons">location_ons</i>
                         <p>Velos</p>
                     </a>
@@ -106,19 +117,14 @@
                         <p>Ajouter Article</p>
                     </a>
                 </li>
-                        </ul>
-                    </a>
-                </li>
-                <li class="nav-item active-pro ">
-                    <a class="nav-link" href="./upgrade.html">
-                        <i class="material-icons">unarchive</i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
             </ul>
+
         </div>
+        {% endblock %}
     </div>
+
     <div class="main-panel">
+
         <!-- Navbar -->
         <!--nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top "-->
             <div class="container-fluid">
@@ -182,41 +188,6 @@
         {% endblock %}
 
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="float-left">
-                    <ul>
-                        <li>
-                            <a href="https://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://creative-tim.com/presentation">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.creative-tim.com/license">
-                                Licenses
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright float-right">
-                    &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>, made with <i class="material-icons">favorite</i> by
-                    <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-                </div>
-            </div>
-        </footer>
     </div>
 </div>
 

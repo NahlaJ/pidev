@@ -1,72 +1,169 @@
 {% extends 'dashbase.html.twig' %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8001/event/">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="product">
-        <div class="container">
-            <div class="ctnt-bar cntnt">
-                <div class="content-bar">
-                    <div class="single-page">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Velo</h1>
+    <p class="lead"><a href="{{ path('velo_index') }}">Home</a></p>
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4"></h1>
+            <!-- Author -->
+            <!-- Preview Image -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <p class="card-category"></p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                            <tr>
+                                                <th>Id</th>
+                                                <td>{{ velo.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Marque</th>
+                                                <td>{{ velo.marque }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Caracteristiques</th>
+                                                <td>{{ velo.caracteristiques }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Age</th>
+                                                <td>{{ velo.age }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Compteur</th>
+                                                <td>{{ velo.compteur }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Prix</th>
+                                                <td>{{ velo.prix }}</td>
+                                            </tr>
+                                            <tr>
+                                                <img class="img-fluid rounded" src="{{ asset('post/' ~ velo.image) }}" alt="{{ velo.id }}">
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                        <center>
+                                        <ul>
 
-                        <div class="product-head">
-                            <a href="{{ path('velo_index') }}">Home</a> <span>::</span>
+                                            <li>
+                                                <div class="btn_form">
+                                                    <a href="{{ path('velo_edit', { 'id': velo.id }) }}"><img src="{{ asset('images/update.png') }}" width="50" height="50"></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                {{ form_start(delete_form) }}
+                                                <input type="image" alt="submit" src="{{ asset('images/delete.png') }}" width="50" height="50">
+                                                {{ form_end(delete_form) }}
+                                            </li>
+                                        </ul>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <br>
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ velo.id }}</td>
-            </tr>
-            <tr>
-                <th>Marque</th>
-                <td>{{ velo.marque }}</td>
-            </tr>
-            <tr>
-                <th>Caracteristiques</th>
-                <td>{{ velo.caracteristiques }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ velo.age }}</td>
-            </tr>
-            <tr>
-                <th>Compteur</th>
-                <td>{{ velo.compteur }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ velo.prix }}</td>
-            </tr>
-            <tr>
-                <img class="img-fluid rounded" src="{{ asset('post/' ~ velo.image) }}" alt="{{ velo.id }}">
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-
-        <li>
-            <div class="btn_form">
-            <a href="{{ path('velo_edit', { 'id': velo.id }) }}">Edit</a>
-            </div>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- /.row -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 {% endblock %}

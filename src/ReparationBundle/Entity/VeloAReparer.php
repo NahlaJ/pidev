@@ -311,4 +311,27 @@ class VeloAReparer
     {
         return $this->User;
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="Facture", mappedBy="veloAReparer")
+     */
+    private $facture = null;
+
+    /**
+     * @return null
+     */
+    public function getFacture()
+    {
+        return $this->facture;
+    }
+
+    /**
+     * @param null $facture
+     */
+    public function setFacture($facture)
+    {
+        $this->facture = $facture;
+    }
+
+
 }

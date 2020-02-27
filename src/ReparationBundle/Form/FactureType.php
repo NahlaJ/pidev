@@ -3,6 +3,8 @@
 namespace ReparationBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,9 @@ class FactureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('prix')->add('description')->add('dateRemise');
+        $builder->add('prix',TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('description',TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('dateRemise',DateType::class, ['attr'=>['class'=>'form-control']]);
     }/**
      * {@inheritdoc}
      */

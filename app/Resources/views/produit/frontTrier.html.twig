@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="parts">
+        <div class="container">
+            <h2>Our Products </h2>
+            <div class="bike-parts-sec">
+                <div class="bike-parts">
+                    <div class="top">
+                        <ul>
+                            <li><a href=""></a>Home </li>
+                            <li><a href=""> / </a></li>
+                            <li><a href=""> Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="bike-apparels">
+                        <div class="parts1">
+                            {% for produit in produits %}
+                                {% if produit.promo != null %}
+                                    {% if produit.promo.dateDebut <= now %}
+                                        <a href="{{ path('produit_single', { 'id': produit.id }) }}"><div class="part-sec">
+                                                <img src="{{ asset('uploads/images/'~ produit.image )}}" alt=""/>
+                                                <div class="part-info">
+                                                    <a href="{{ path('produit_single', { 'id': produit.id }) }}"><h5>{{ produit.nom }} <span><i style="color: seagreen">On Discount</i><span><label>$</label><del>{{ produit.prix }}</del> <label> $ </label> {{ produit.promo.newPrix }}</span></h5></a>
+                                                    <a class="add-cart" href="{{ path('produit_single', { 'id': produit.id }) }}">Quick View</a>
+                                                    <a class="qck" href="#">BUY NOW</a>
+                                                </div>
+                                            </div></a>
+
+                                    {% else %}
+
+                                        <a href="{{ path('produit_single', { 'id': produit.id }) }}"><div class="part-sec">
+                                                <img src="{{ asset('uploads/images/'~ produit.image )}}" alt=""/>
+                                                <div class="part-info">
+                                                    <a href="{{ path('produit_single', { 'id': produit.id }) }}"><h5>{{ produit.nom }}<span>${{ produit.prix }}</span></h5></a>
+                                                    <a class="add-cart" href="{{ path('produit_single', { 'id': produit.id }) }}">Quick View</a>
+                                                    <a class="qck" href="#">BUY NOW</a>
+                                                </div>
+                                            </div></a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{{ path('produit_single', { 'id': produit.id }) }}"><div class="part-sec">
+                                            <img src="{{ asset('uploads/images/'~ produit.image )}}" alt=""/>
+                                            <div class="part-info">
+                                                <a href="{{ path('produit_single', { 'id': produit.id }) }}"><h5>{{ produit.nom }}<span>${{ produit.prix }}</span></h5></a>
+                                                <a class="add-cart" href="{{ path('produit_single', { 'id': produit.id }) }}">Quick View</a>
+                                                <a class="qck" href="#">BUY NOW</a>
+                                            </div>
+                                        </div></a>
+                                {% endif %}
+                            {% endfor %}
+
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="rsidebar span_1_of_left">
+                    <section  class="sky-form">
+                        <div class="product_right">
+                            <h3 class="m_2">Categories</h3>
+                            <ul class="ul888">
+                               <li class="li888"><a href="{{ asset('produit/front') }}">All</a></li>
+                                {% for categorie in categories %}
+                                <li class="li888"><a href="{{ path('produit_trier', { 'id': categorie.id }) }}">{{ categorie.nom }}</a></li>
+                                {% endfor %}
+
+                            </ul>
+
+
+
+
+                        </div>
+                    </section>
+                    <section  class="sky-form">
+                        <div class="product_right">
+                            <h3 class="m_2">For</h3>
+                            <ul class="ul888">
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/1') }}">Men</a></li>
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/2') }}">Women</a></li>
+                                <li class="li888"> <a href="{{ asset('produit/front') }}">All</a></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section  class="sky-form">
+                        <div class="product_right">
+                            <h3 class="m_2">Types</h3>
+                            <ul class="ul888">
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/3') }}">Mountain</a></li>
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/4') }}">Sport</a></li>
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/5') }}">Popular</a></li>
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/6') }}">Kids</a></li>
+                                <li class="li888">  <a href="{{ asset('produit/front/tri/7') }}">Special</a></li>
+                            </ul>
+
+                        </div>
+                    </section>
+                    <section  class="sky-form">
+                        <div class="product_right">
+                            <h3 class="m_2">Prices</h3>
+                            <ul class="ul888">
+
+                                <li class="li888"><a href="{{ asset('produit/front/tri/8') }}">Less than <b>50 dt</b></a></li>
+                                <li class="li888"><a href="{{ asset('produit/front/tri/9') }}">From <b>50 dt</b> To <b>99 dt</b></a></li>
+                                <li class="li888"><a href="{{ asset('produit/front/tri/10') }}">From <b>100 dt</b> To <b>199 dt</b></a></li>
+                                <li class="li888"><a href="{{ asset('produit/front/tri/11') }}">From <b>200 dt</b> To <b>499 dt</b></a></li>
+                                <li class="li888"><a href="{{ asset('produit/front/tri/12') }}">From <b>500 dt</b> To <b>999 dt</b></a></li>
+                                <li class="li888"><a href="{{ asset('produit/front/tri/13') }}">More than <b>1000dt</b></a></li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -3,6 +3,11 @@ veloR_index:
     defaults: { _controller: "ReparationBundle:VeloAReparer:index" }
     methods:  GET
 
+veloR_single:
+    path:     /single
+    defaults: { _controller: "ReparationBundle:VeloAReparer:single" }
+    methods:  GET
+
 veloR_show:
     path:     /{id}/show
     defaults: { _controller: "ReparationBundle:VeloAReparer:show" }

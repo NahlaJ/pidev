@@ -1,0 +1,139 @@
+{% extends 'dashbase.html.twig'  %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item active ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Orders</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('event') }}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Show articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>add Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Categories</h4>
+                        <p class="card-category">This is your current Categories</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+    <table class="table">
+        <thead class="text-primary">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td><a href="{{ path('categorie_show', { 'id': categorie.id }) }}">{{ categorie.id }}</a></td>
+                <td>{{ categorie.nom }}</td>
+                <td><img src="{{ asset('uploads/images/'~ categorie.image )}}" width="200" height="200"></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorie_show', { 'id': categorie.id }) }}"><img src="{{ asset('images/eye.png') }}" width="30" height="30"></a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorie_edit', { 'id': categorie.id }) }}"><img src="{{ asset('images/update.png') }}" width="30" height="30"></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('categorie_new') }}">Create a new categorie</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

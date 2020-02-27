@@ -10,6 +10,30 @@
         <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/owl.carousel.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/main.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/responsive.css')}}">
+        <style>
+        .ul888 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+        }
+
+        .li888 a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        .li888 a:hover {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+
+
     {% endblock %}
 
     <title>Bike Shop a Ecommerce Category Flat Bootstarp Responsive Website Template| Parts :: w3layouts</title>
@@ -56,43 +80,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="header">
                 <div class="logo">
-                    <a href="{{ asset('http://localhost/A+/sprint1/web/app_dev.php/MainView/MainIndex') }}"><img src="{{ asset('images/logo.png') }}" alt=""/></a>
+                    <a href="{{ asset('promo/menu') }}"><img src="{{ asset('images/logo.png') }}" alt=""/></a>
                 </div>
                 <div class="top-nav">
                     <label class="mobile_menu" for="mobile_menu">
                         <span>Menu</span>
                     </label>
                     <input id="mobile_menu" type="checkbox">
-                    <ul class="nav">
-                        <li class="dropdown1"><a href="bicycles.html">SHOP</a>
-                            <ul class="dropdown2">
-                                <li><a href="bicycles.html">Bicycles</a></li>
-                                <li><a href="bicycles.html">Accessories</a></li>
-                                <li><a href="bicycles.html">PROMO</a></li>
-                            </ul>
+                            <ul class="nav">
+                                <li class="dropdown1"><a href="{{ asset('categorie/front') }}">SHOP</a>
+                                    <ul class="dropdown2">
+                                        <li><a href="{{ asset('categorie/front') }}">Categories</a></li>
+                                        <li><a href="{{ asset('produit/front') }}">Products</a></li>
+                                        <li><a href="{{ asset('promo/front') }}">PROMO</a></li>
+                                    </ul>
                         </li>
                         <li class="dropdown1"><a href="{{ path('indexFront') }}">RENTING</a>
                         </li>
-                        <li class="dropdown1"><a href="#">MAINTENANCE</a>
-                            <ul class="dropdown2">
-                                <li><a href="{{ path('reparateur_frontindex') }}">Repairers list</a></li>
-                                <li><a href="{{ path('veloR_new') }}">Add your broken bike</a></li>
-                            </ul>
-                        </li>
+                                <li class="dropdown1"><a href="#">MAINTENANCE</a>
+                                    <ul class="dropdown2">
+                                        <li><a href="{{ path('reparateur_frontindex') }}">Repairers list</a></li>
+                                        <li><a href="{{ path('veloR_new') }}">Add your broken bike</a></li>
+                                        <li><a href="{{ path('veloR_single') }}">Check the status of your Bike</a></li>
+
+                                    </ul>
+                                </li>
                         <li class="dropdown1"><a href="">EVENT</a>
                             <ul class="dropdown2">
-                                <li><a href="http://localhost/sprint1/web/app_dev.php/event/front">EVENT DISPO</a></li>
-                                <li><a href="http://localhost/sprint1/web/app_dev.php/event/saveevent">MES PARTICIPATIONS</a></li>
+                                <li><a href="http://127.0.0.1:8001/event/front">EVENT DISPO</a></li>
+                                <li><a href="{{ path("event_event") }}">my events</a></li>
 
-                                <form method="post" action="{{ path("event_event") }}">
-                                    <li><input type="submit" value="my events" ></li>
-                                </form>
+
                             </ul>
                         </li>
                         <li class="dropdown1"><a href="#">ARTICLES</a>
                             <ul class="dropdown2">
                                 <li><a href="{{  path('liste') }}">Consulter les articles</a> </li>
-                                <li><a href="{{  path('add') }}">Ajouter Article</a></li>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li><a href="{{  path('add') }}">Ajouter Article</a></li>
+                                    <li><a href="{{  path('mes') }}">Mes articles</a></li>
+                                {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                                    <br>
+                                {% endif %}
 
                             </ul>
                         </li>
@@ -120,14 +149,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="footer">
         <div class="container">
             <div class="logo2">
-                <a href="http://localhost/A+/sprint1/web/app_dev.php/MainView/MainIndex"><img src="{{ asset('images/logo2.png') }}" alt=""/></a>
-            </div>
+                <a href="{{ asset('promo/menu') }}"><img src="{{ asset('images/logo.png') }}" alt=""/></a></div>
             <div class="ftr-menu">
                 <ul>
                     <li><a href="bicycles.html">SHOP</a></li>
                     <li><a href="parts.html">RENTING</a></li>
                     <li><a href="accessories.html">MAINTENANCE</a></li>
-                    <li><a href="http://localhost/sprint1/web/app_dev.php/event/front">EVENT</a></li>
+                    <li><a href="http://127.0.0.1:8001/event/front">EVENT</a></li>
                     <li><a href="404.html">ARTICLES</a></li>
                 </ul>
             </div>
@@ -138,6 +166,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% endblock %}
 
 
-{% block javascripts %}{% endblock %}
+
+
+
 </body>
 </html>

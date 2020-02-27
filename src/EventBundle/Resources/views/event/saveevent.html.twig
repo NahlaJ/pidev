@@ -224,10 +224,11 @@
                                             <!--td style="align-content: center"><input class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal i.idevent }}" value="Cancel"></td-->
 
                                             <td>
-                                            <form method="get">
-                                                <input hidden value="cancel" name="cancel">
-                                                <input value="cancel" type="submit" class="btn btn-danger">
-                                            </form>
+                                                <a href="{{ path('event_cancel',{'idevent':i.idevent}) }}">CANCEL</a>
+                                                    <!--li><input type="submit" value="cancel" ></li-->
+
+
+
                                             </td>
 
                                         </tr>

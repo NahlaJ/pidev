@@ -4,6 +4,8 @@ namespace UserBundle\Entity;
 
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
+use Mgilet\NotificationBundle\NotifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use EventBundle\Entity\Event;
 use EventBundle\Entity\Reservationevent;
@@ -11,8 +13,9 @@ use EventBundle\Entity\Reservationevent;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user_table")
+ * @Notifiable(name="user")
  */
-class User extends BaseUser
+class User extends BaseUser implements NotifiableInterface
 {
     /**
      * @ORM\Id

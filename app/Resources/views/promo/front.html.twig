@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="bikes">
+        <div class="mountain-sec">
+            <h2>Current Promotions</h2>
+            {% for promo in promos %}
+            <div class="bike">
+                    <img src="{{ asset('uploads/images/'~ promo.produit.image )}}" width="100px" height="250px" alt=""/>
+                <br><br>
+                    <div class="bike-cost">
+                        <div class="bike-mdl888">
+                            <h3>{{ promo.titre }}</h3>
+                            <br>
+                            <h4>Before :<del> {{ promo.produit.prix }} dt </del></h4>
+                            <h4>After :{{ promo.newPrix }} dt</h4>
+                            <br>
+                            <h5>{{ promo.description }} </h5>
+                            <br><br>
+                        </div>
+                        <div class="bike-cart888">
+                            <a class="buy" href="#">Add to Cart</a>
+                            <br><br>
+                            <a class="buy" href="{{ path('produit_single', { 'id': promo.produit.id } ) }}">Check the product</a>
+
+
+                            <br><br>
+                            {% if promo.quantite > 0 %}
+                                <h4 style="color: darkolivegreen">En Stock</h4>
+                            {% else %}
+                                <h4 style="color: darkred">Out Of Stock</h4>
+                            {% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="fast-viw888">
+                        <a href="{{ path('produit_single', { 'id': promo.produit.id }) }}">{{ promo.remise }} %</a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -48,8 +48,6 @@ class ArticleController extends Controller
     public function adduAction(Request $request ,UserInterface $user)
     {
 
-
-
         $article = new Article();
         $form= $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -284,5 +282,29 @@ public function deleteuCommentAction(Request $request)
 
         return $this->redirectToRoute('listeu');
     }
+
+    public function listemAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+        $articles=$em->getRepository('ArticleBundle:Article')->confirmedArticle();
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $articles=$paginator->paginate(
+            $articles,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',3)
+        );
+
+
+        return $this->render("@Article/Article/mes.html.twig", array(
+            "articles" =>$articles
+        ));
+
+    }
+
 }
 

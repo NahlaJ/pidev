@@ -22,7 +22,7 @@ class VeloRepository extends \Doctrine\ORM\EntityRepository
     }
     public function confirmedVelo(){
         return $this->getEntityManager()->createQuery(
-            'SELECT v FROM LocationBundle:Velo v where v.etat=0'
+            'SELECT v FROM LocationBundle:Velo v where v.etat=1'
         )->getResult();
     }
 }

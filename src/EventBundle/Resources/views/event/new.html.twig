@@ -1,56 +1,127 @@
 {% extends 'dashbase.html.twig' %}
+{% block nav %}
 
-{% block content %}
-    <div class="container">
-        <div class="row" style=" margin-bottom: 55px">
-            <div class="col-md-1"></div>
-    <div class="col-md-1" style="margin-top: 25px">
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" href="{{ asset('event') }}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
 
     </div>
-            <div class="col-md-8" style="margin-top: 25px; background-color: #6a6a6a57; padding: 40px 180px">
-                <h1 style=" margin-bottom: 20px; font-size: 40px; text-align: center" >Add A New Event</h1>
+{% endblock %}
 
-
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Create New Event</h4>
+                    </div>
+                    <div class="card-body">
                 {{ form_start(form) }}
 
                 <h6>Name</h6>
                 {{ form_widget(form.nomevent) }}
-                <span id="name_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="name_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
-                <br>
+
                 <h6 style="margin-top: 20px">Description</h6>
                 {{ form_widget(form.description) }}
-                <span id="des_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="des_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
                 <br>
                 <h6 style="margin-top: 20px">Date</h6>
                 {{ form_widget(form.dateevent ) }}
-                <span id="date_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="date_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
 
                 <br>
                 <h6 style="margin-top: 20px">Place</h6>
                 {{ form_widget(form.lieuevent ) }}
-                <span id="place_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="place_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
 
                 <br>
                 <h6 style="margin-top: 20px">Capacity</h6>
                 {{ form_widget(form.capevent) }}
-                <span id="cap_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="cap_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
 
                 <br>
                 <h6 style="margin-top: 20px">Price</h6>
                 {{ form_widget(form.ticketprice) }}
-                <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
 
                 <br>
                 <h6 style="margin-top: 20px">Nbr Personne</h6>
                 {{ form_widget(form.nbrepersonnes) }}
-                <span id="price_error" style="display: none; color: red; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-exclamation-triangle"></i></span>
-                <span id="price_succ" style="display: none; color: #1e7e34; position: absolute; margin-left: 500px; margin-top: -38px"><i class="fa fa-check-circle"></i></span>
+
 
                 <br>
                 <h6 style="margin-top: 20px">Add an image</h6>
@@ -62,15 +133,21 @@
                 <br>
                 {{ form_end(form) }}
             </div>
+                    <center>
+                    <ul>
+                        <li>
+                            <a href="{{ path('event_index') }}"><img src="{{ asset('images/back.png') }}" width="50" height="50"></a>
+                        </li>
+                    </ul>
+                    </center>
         </div>
     </div>
 
 
-    <ul>
-        <li>
-            <a href="{{ path('event_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

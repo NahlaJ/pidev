@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block content %}
+    <div id="cate" class="categories">
+        <div class="container">
+            <h3>OUR SERVICES</h3>
+            <div class="categorie-grids">
+                <a href="bicycles.html"><div class="col-md-4 cate-grid grid1">
+                        <h4>PRODUCTS / PROMOS</h4>
+                        <p>Are you ready for the new Collection ?</p>
+                        <a class="store" href="{{ asset('categorie/front') }}">GO TO STORE</a>
+                    </div></a>
+                <a href="bicycles.html"><div class="col-md-4 cate-grid grid2">
+                        <h4>PREMIMUM SERIES</h4>
+                        <p>Exclusive Bike Components</p>
+                        <a class="store" href="bicycles.html">GO TO STORE</a>
+                    </div></a>
+                <a href="bicycles.html"><div class="col-md-4 cate-grid grid3">
+                        <h4>CITY BIKES</h4>
+                        <p>Street Playground</p>
+                        <a class="store" href="bicycles.html">GO TO STORE</a>
+                    </div></a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--bikes-->
+    <div class="bikes">
+        <h3>MOST POPULAR PRODUCTS</h3>
+        <div class="bikes-grids">
+            <ul id="flexiselDemo1">
+                {% for prodView in prodViews |slice(0,5) %}
+                <li>
+                    <img src="{{ asset('uploads/images/'~ prodView.image )}}" width="150" height="200" alt=""/>
+                    <div class="bike-info">
+                        <div class="model">
+                            <h4>{{ prodView.nom }}<span>{{ prodView.prix }} dt </span></h4>
+                        </div>
+                        <div class="model-info">
+                            <a href="#">BUY</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="viw">
+                        <a href="{{ path('produit_single', { 'id': prodView.id }) }}">Quick View</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+<br><br><br>
+        <h3>LAST PRODUCTS</h3>
+        <div class="bikes-grids">
+            <ul id="flexiselDemo2">
+                {% for prodDate in prodDates |slice(0,5) %}
+                    <li>
+                        <img src="{{ asset('uploads/images/'~ prodDate.image )}}" width="150" height="200" alt=""/>
+                        <div class="bike-info">
+                            <div class="model">
+                                <h4>{{ prodDate.nom }}<span>{{ prodDate.prix }} dt </span></h4>
+                            </div>
+                            <div class="model-info">
+                                <a href="#">BUY</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="viw">
+                            <a href="{{ path('produit_single', { 'id': prodDate.id }) }}">Quick View</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br><br><br>
+        <h3>LAST DISCOUNTS</h3>
+        <div class="bikes-grids">
+            <ul id="flexiselDemo3">
+                {% for promo in promos |slice(0,5) %}
+                    <li>
+                        <img src="{{ asset('uploads/images/'~ promo.produit.image )}}" width="150" height="200" alt=""/>
+                        <div class="bike-info">
+                            <div class="model">
+                                <h4>{{ promo.titre }}<span><del>{{ promo.produit.prix }} dt</del>   {{ promo.newPrix }} dt </span> </h4>
+                            </div>
+                            <div class="model-info">
+                                <a href="#">BUY</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="viw">
+                            <a href="{{ path('produit_single', { 'id': promo.produit.id }) }}">Quick View</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+    {% block javascripts %}
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#flexiselDemo1").flexisel({
+                    visibleItems: 3,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover:true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint:480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint:640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint:768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+            });
+
+            $(window).load(function() {
+                $("#flexiselDemo2").flexisel({
+                    visibleItems: 3,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover:true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint:480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint:640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint:768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+            });
+
+            $(window).load(function() {
+                $("#flexiselDemo3").flexisel({
+                    visibleItems: 3,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover:true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint:480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint:640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint:768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+            });
+
+
+        </script>
+<script type="text/javascript" src=" {{ asset( 'js/jquery.flexisel.js' ) }}"></script>
+    {% endblock %}

@@ -2,6 +2,7 @@
 
 {% block content %}
 
+    {% if  is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 <center>
     <div class="card-header">
 
@@ -52,5 +53,9 @@
 
 
 </center>
+    {% else %}
+        <center><strong><p style="font-size: 50px"> Please LOGIN or SIGN UP </p></strong></center>
+
+    {% endif %}
 
 {% endblock %}

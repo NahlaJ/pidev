@@ -28,13 +28,21 @@ event_event:
     path:     /saveevent
     defaults: { _controller: EventBundle:Event:saveevent}
 
+
+event_cancel:
+    path:   /cancel/{idevent}
+    defaults: { _controller: EventBundle:Event:cancel }
+
+
+
 event_pdf:
     path:     /pdf
     defaults: { _controller: "EventBundle:Event:pdf" }
     methods:  [GET, POST]
 
-event_users:
-    path:     /users
-    defaults: { _controller: EventBundle:Event:users}
+event_participants:
+    path:     /participants
+    defaults: { _controller: EventBundle:Event:participants}
+
 
 

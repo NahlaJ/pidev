@@ -3,6 +3,10 @@
 namespace CatalogueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
 
 
 /**
@@ -10,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="promo")
  * @ORM\Entity(repositoryClass="CatalogueBundle\Repository\PromoRepository")
+ * @UniqueEntity(fields="titre", message="titre is already used.")
+ * @UniqueEntity(fields="produit", message="product is already on discount.")
+
  */
 class Promo
 {
@@ -39,6 +46,7 @@ class Promo
     /**
      * @var \DateTime
      *
+     * @Assert\GreaterThan("today")
      * @ORM\Column(name="dateDebut", type="datetime")
      */
     private $dateDebut;
@@ -62,14 +70,20 @@ class Promo
      *
      * @ORM\Column(name="quantite", type="integer")
      */
-    private $quantite;
+    private $quantite =0;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="views", type="integer")
+     * @ORM\Column(name="newPrix", type="float")
      */
-    private $views;
+    private $newPrix ;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Produit" ,inversedBy="promo")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private $produit;
 
 
     /**
@@ -226,28 +240,52 @@ class Promo
         return $this->quantite;
     }
 
+
     /**
-     * Set views
+     * Set produit
      *
-     * @param integer $views
+     * @param \CatalogueBundle\Entity\Produit $produit
      *
      * @return Promo
      */
-    public function setViews($views)
+    public function setProduit(\CatalogueBundle\Entity\Produit $produit = null)
     {
-        $this->views = $views;
+        $this->produit = $produit;
 
         return $this;
     }
 
     /**
-     * Get views
+     * Get produit
      *
-     * @return int
+     * @return \CatalogueBundle\Entity\Produit
      */
-    public function getViews()
+    public function getProduit()
     {
-        return $this->views;
+        return $this->produit;
+    }
+
+    /**
+     * Set newPrix
+     *
+     * @param float $newPrix
+     *
+     * @return Promo
+     */
+    public function setNewPrix($newPrix)
+    {
+        $this->newPrix = $newPrix;
+
+        return $this;
+    }
+
+    /**
+     * Get newPrix
+     *
+     * @return float
+     */
+    public function getNewPrix()
+    {
+        return $this->newPrix;
     }
 }
-

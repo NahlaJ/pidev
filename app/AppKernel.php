@@ -36,6 +36,8 @@ class AppKernel extends Kernel
 
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -3,6 +3,8 @@
 namespace ReparationBundle\Controller;
 
 use ReparationBundle\Entity\Facture;
+use ReparationBundle\Entity\Reparateur;
+use ReparationBundle\Entity\VeloAReparer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Snappy\Pdf;
@@ -20,6 +22,9 @@ class FactureController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $em = $this->getDoctrine()->getManager();
 
         $factures = $em->getRepository('ReparationBundle:Facture')->findAll();
@@ -27,21 +32,41 @@ class FactureController extends Controller
         return $this->render('facture/index.html.twig', array(
             'factures' => $factures,
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
      * Creates a new facture entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request )
     {
+
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
+        $input=$request->get('id');
         $facture = new Facture();
         $form = $this->createForm('ReparationBundle\Form\FactureType', $facture);
         $form->handleRequest($request);
+        $monVelo = $this->getDoctrine()->getRepository(VeloAReparer::class)->find($input);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $facture->setVeloAReparer($monVelo);
+            $facture->getVeloAReparer()->setFacture($facture);
+            $rep = $this->getDoctrine()->getRepository(Reparateur::class)->find($facture->getVeloAReparer()->getReparateur()->getId());
+            $rep->setStatus('libre');
+            $facture->getVeloAReparer()->setRepNull();
+            $facture->getVeloAReparer()->setStatus("Done");
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($facture);
+            $em->persist($rep);
             $em->flush();
 
             return $this->redirectToRoute('facture_show', array('id' => $facture->getId()));
@@ -51,6 +76,12 @@ class FactureController extends Controller
             'facture' => $facture,
             'form' => $form->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -59,12 +90,21 @@ class FactureController extends Controller
      */
     public function showAction(Facture $facture)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $deleteForm = $this->createDeleteForm($facture);
 
         return $this->render('facture/show.html.twig', array(
             'facture' => $facture,
             'delete_form' => $deleteForm->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -73,6 +113,9 @@ class FactureController extends Controller
      */
     public function editAction(Request $request, Facture $facture)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $deleteForm = $this->createDeleteForm($facture);
         $editForm = $this->createForm('ReparationBundle\Form\FactureType', $facture);
         $editForm->handleRequest($request);
@@ -88,6 +131,12 @@ class FactureController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -123,15 +172,12 @@ class FactureController extends Controller
             ->getForm()
         ;
     }
-    public function pdfAction(Request $request)
+    public function pdfAction(Facture $facture)
     {
-        $em = $this->getDoctrine()->getManager();
-        $facture = $em->getRepository('ReparationBundle:Facture')->findAll();
-        $snappy = new Pdf('C:\pic_2018\wkhtmltopdf\bin\wkhtmltopdf');
-        //$snappy = $this->get('knp_snappy.pdf');
 
+        $snappy = new Pdf('C:\wkhtmltopdf\bin\wkhtmltopdf');
         $html = $this->renderView("facture/pdf.html.twig", array(
-            'f' => $facture,
+            'facture' => $facture,
             "title" => "Facture"
         ));
         $filename ="pdf_from_twig";
@@ -143,6 +189,16 @@ class FactureController extends Controller
                 'Content-Disposition' => 'inline; filename="'.$filename.'.pdf"'
             )
         );
+    }
+
+    public function checkAction(Facture $facture)
+    {
+        $deleteForm = $this->createDeleteForm($facture);
+
+        return $this->render('facture/showfront.html.twig', array(
+            'facture' => $facture,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
 

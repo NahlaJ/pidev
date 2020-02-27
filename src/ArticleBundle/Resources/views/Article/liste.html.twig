@@ -42,7 +42,7 @@
                         searchRequest.abort();
                     searchRequest = $.ajax({
                         type: "GET",
-                        url: "{{ path('search') }}",
+                        url: "{{ path('asearch') }}",
                         data: {
                             'q' : value
                         },

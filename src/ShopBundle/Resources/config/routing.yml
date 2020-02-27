@@ -1,3 +1,55 @@
 shop_homepage:
     path:     /
-    defaults: { _controller: ShopBundle:Default:index }
+    defaults: { _controller: ShopBundle:Admin:index }
+
+shop_index:
+    path:     /index
+    defaults: { _controller: ShopBundle:commande:index }
+
+panier:
+    path:     /panier
+    defaults: { _controller: ShopBundle:commande:showPanier }
+
+
+supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: ShopBundle:commande:supprimer }
+
+ajouter:
+    path:     /panier/ajouter/{id}
+    defaults: { _controller: ShopBundle:commande:ajouter }
+
+
+order:
+    path:     /commande
+    defaults: { _controller: ShopBundle:commande:order }
+
+show_commandes:
+    path:     /admin/backoffice/commandes
+    defaults: { _controller: ShopBundle:commande:showCommandes }
+show_infos_commandes:
+    path:     /admin/backoffice/infos_commande/{id}
+    defaults: { _controller: ShopBundle:commande:showInfosCommande}
+mes_commandes:
+    path:     /mes_commandes
+    defaults: { _controller: ShopBundle:commande:MesCommmandes}
+maCommande:
+    path:     /ma_commande/{id}
+    defaults: { _controller: ShopBundle:commande:MaCommande}
+viderPAnier:
+  path:     /vide
+  defaults: { _controller: ShopBundle:commande:viderPanier}
+stripe:
+    path:     /stripe
+    defaults: { _controller: ShopBundle:commande:stripe}
+shop_stripekey:
+    path:     /stripe-key
+    defaults: { _controller: "ShopBundle:commande:stripeKey" }
+shop_stripepay:
+    path:     /stripe-pay
+    defaults: { _controller: "ShopBundle:commande:stripePay" }
+Less_quantity:
+    path:     /panier/less/{id}
+    defaults: { _controller: ShopBundle:commande:Less }
+
+

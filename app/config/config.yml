@@ -16,11 +16,12 @@ imports:
 parameters:
     locale: en
     photos_directory: '%kernel.root_dir%/../web/post'
-    images_directory: '%kernel.project_dir%/web/'
+    images_directory: '%kernel.project_dir%/web/post'
+    image_directory: '%kernel.project_dir%/web/uploads/images'
 
 framework:
     esi: ~
-    translator:      { fallback: '%locale%' }
+    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -135,5 +136,4 @@ notifications:
     app_key:    your_key
     app_secret: secret
     cluster:    cluster
-
 

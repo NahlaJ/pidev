@@ -2,6 +2,21 @@ event_event:
     resource: "@EventBundle/Controller/EventController.php"
     type:     annotation
 
+catalogue_rate:
+    resource: "@CatalogueBundle/Controller/RateController.php"
+    type:     annotation
+
+catalogue_promo:
+    resource: "@CatalogueBundle/Controller/PromoController.php"
+    type:     annotation
+
+catalogue_produit:
+    resource: "@CatalogueBundle/Controller/ProduitController.php"
+    type:     annotation
+
+catalogue_categorie:
+    resource: "@CatalogueBundle/Controller/CategorieController.php"
+    type:     annotation
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
@@ -31,11 +46,6 @@ location:
 shop:
     resource: "@ShopBundle/Resources/config/routing.yml"
     prefix:   /
-
-catalogue:
-    resource: "@CatalogueBundle/Resources/config/routing.yml"
-    prefix:   /
-
 
 
 fos_user:

@@ -28,6 +28,67 @@ use UserBundle\Entity\User;
  */
 class EventController extends Controller
 {
+
+    /**
+     *
+     * @Route("/saveevent", name="event_event")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function saveeventAction(Request $request)
+    {
+        $user = $this->getUser();
+        $reservations = $this->getDoctrine()
+            ->getRepository(Reservationevent::class)
+            ->findBy(['user' => $user->getId()]);
+        // $em = $this->getDoctrine()->getManager();
+        /* $nn = $this->getDoctrine()
+             ->getRepository(Reservationevent::class)
+             ->findBy(['user' => $user->getId()]);
+         //$idevent=$nn->getEvent();*/
+        //$event = $em->getRepository(Event::class)->findOneByIdevent($idevent);
+        $events = array();
+        $old = array();
+        $new = array();
+
+        foreach ($reservations as $m) {
+            array_push($events, $m->getEvent());}
+
+
+        /* if ($request->getMethod() == Request::METHOD_DELETE) {
+
+             if ($request->get('cancel') == "cancel") {
+
+                 $reservations = $this->getDoctrine()
+                     ->getRepository(Reservationevent::class)
+                     ->findBy(['user' => $user->getId()]);
+                 $paricipants = array();
+                 $events = array();
+                 foreach ($reservations as $m) {
+                     array_reduce($events, $m->getEvent());}
+
+
+                 //$reservation =$em->getRepository(Reservationevent::class)->myFindMe($user,$idevent);
+                 $em->remove($events);
+
+
+                 $this->getDoctrine()->getManager()->flush();
+                 $em->flush();
+
+
+             }
+
+
+         }*/
+        return $this->render('@Event/event/saveevent.html.twig', array(
+            'events' => $events,
+            'my' => $new,
+            'old' => $old,
+        ));
+
+    }
+
     /**
      * Lists all event entities.
      *
@@ -62,7 +123,7 @@ class EventController extends Controller
 
                     if ($request->get('TELECHARGER_PDF') == "TELECHARGER_PDF") {
 
-                        $snappy = new Pdf('C:\pic_2018\wkhtmltopdf\bin\wkhtmltopdf');
+                        $snappy = new Pdf('C:\wkhtmltopdf\bin\wkhtmltopdf');
                         $html = "<style>
           .clearfix:after {
   content: \"\";
@@ -322,13 +383,13 @@ footer {
                 $event = new Event();
                 $form = $this->createForm('EventBundle\Form\EventType', $event);
                 $form->handleRequest($request);
-                /* $basic  = new \Nexmo\Client\Credentials\Basic('a5a703ea', 'o4nIMO8eCrbXP76E');
+                 $basic  = new \Nexmo\Client\Credentials\Basic('a5a703ea', 'o4nIMO8eCrbXP76E');
                  $client = new \Nexmo\Client($basic);
                  $message = $client->message()->send([
                      'to' => '21694899540',
                      'from' => 'kid o',
                      'text' => 'Salut, un evenement a été ajouté, merci de le consulter et passez une bonne journée ',
-                 ]);*/
+                 ]);
 
                 if ($form->isSubmitted() && $form->isValid()) {
 
@@ -525,65 +586,7 @@ footer {
         }
     }
 
-    /**
-     *
-     * @Route("/saveevent", name="event_event")
-     * @Method({"GET", "POST","DELETE"})
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function saveeventAction(Request $request)
-    {
-        $user = $this->getUser();
-        $reservations = $this->getDoctrine()
-            ->getRepository(Reservationevent::class)
-            ->findBy(['user' => $user->getId()]);
-        /*$em = $this->getDoctrine()->getManager();
-        $nn = $this->getDoctrine()
-            ->getRepository(Reservationevent::class)
-            ->findBy(['user' => $user->getId()]);
-        //$idevent=$nn->getEvent();*/
-        //$event = $em->getRepository(Event::class)->findOneByIdevent($idevent);
-        $events = array();
-        $old = array();
-        $new = array();
 
-        foreach ($reservations as $m) {
-            array_push($events, $m->getEvent());}
-
-        /*
-        if ($request->getMethod() == Request::METHOD_GET) {
-
-            if ($request->get('cancel') == "cancel") {
-
-                $reservations = $this->getDoctrine()
-                    ->getRepository(Reservationevent::class)
-                    ->findBy(['user' => $user->getId()]);
-                $paricipants = array();
-                $events = array();
-                foreach ($reservations as $m) {
-                    array_reduce($events, $m->getEvent());}
-
-
-                //$reservation =$em->getRepository(Reservationevent::class)->myFindMe($user,$idevent);
-                $em->remove($events);
-
-
-                $this->getDoctrine()->getManager()->flush();
-                $em->flush();
-
-
-            }
-
-
-        }*/
-        return $this->render('@Event/event/saveevent.html.twig', array(
-            'events' => $events,
-            'my' => $new,
-            'old' => $old,
-        ));
-
-    }
 
 
     /**
@@ -676,31 +679,38 @@ footer {
 
     /**
      *
-     * @Route("/users", name="event_users")
+     * @Route("/participants", name="event_participants")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function usersAction(Request $request)
+    public function participantsAction(Request $request)
     {
         $user = $this->getUser();
         //print $user;
 
-        $reservations = $this->getDoctrine()
-            ->getRepository(Reservationevent::class)
-            ->findBy(['user' => $user->getId()]);
-        $paricipants = array();
-        $events = array();
-        foreach ($reservations as $m) {
-            array_push($paricipants ,$m->getUser());
-           array_push($events, $m->getEvent());}
+        if($user != null) {
+            //$idUser = $user->getId();
+            $em = $this->getDoctrine()->getManager();
+           // $users = $em->getRepository(User::class)->findAll();
+            $reservations = $this->getDoctrine()
+                ->getRepository(Reservationevent::class)->findAll();
+                //->findBy(['user' => $user->getId()]);
+
+            $paricipants = array();
+            $events = array();
+            foreach ($reservations as $m) {
+                array_push($paricipants, $m->getUser());
+                //array_push($events, $m->getEvent());
+            }
 
 
-            return $this->render('@Event/event/users.html.twig', array(
-                'paricipants' => $paricipants,
-                'events' => $events,
+            return $this->render('@Event/event/participants.html.twig', array(
+                'paricipants' => $reservations,
+                //'events' => $events,
             ));
 
+        }
             /*
             $user = $this->getUser();
             if($user == null )
@@ -717,11 +727,53 @@ footer {
 
 
 
-                return $this->render('@Event/event/users.html.twig',array(
+                return $this->render('@Event/event/participants.html.twig',array(
                     'users' => $users,
                 ));
             }*/
 
+    }
+
+
+    /**
+     * Deletes a reservationevent entity.
+     *
+     * @Route("/cancel/{idevent}", name="event_cancel")
+     * @Method({"DELETE", "GET"})
+     */
+    public function cancelAction($idevent)
+    {
+        //die('id: '.$randonne->getIdrando())
+        //die("here");
+        $user = $this->getUser();
+        $old = array();
+        $new = array();
+        if($user != null)
+        {
+            $idUser = $user->getId();
+            //$idEvent = $event->getIdevent();
+            $em = $this->getDoctrine()->getManager();
+            $reservation =$em->getRepository(Reservationevent::class)->myFindMe($idUser,$idevent);
+            $em->remove($reservation[0]);
+
+            $nbrePersonnes = $em->getRepository(Event::class)->getAllAboutEvent($idevent);
+            //die('nb '.);
+            $event = $this->getDoctrine()->getRepository(Event::class)->find($idevent);
+            $new = $nbrePersonnes[0]->getNbrepersonnes()-1;
+            //die('new '.$new);
+            $event->setNbrepersonnes($new);
+            //die('new : '.$randonne->getNbreclient());
+            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
+
+
+
+        }
+        return $this->render('@Event/event/saveevent.html.twig', array(
+            'events' => $event,
+            'my' => $new,
+            'old' => $old,
+        ));
     }
 
 }

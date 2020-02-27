@@ -18,17 +18,37 @@ class ReparateurController extends Controller
 {
     /**
      * Lists all reparateur entities.
-     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $em = $this->getDoctrine()->getManager();
 
         $reparateurs = $em->getRepository('ReparationBundle:Reparateur')->findAll();
+                $query = $reparateurs;
+                /**
+                 * @var $paginator \Knp\Component\Pager\Paginator
+                 */
+                $paginator = $this->get('knp_paginator');
+                $result = $paginator->paginate(
+                    $query,
+                    $request->query->getInt('page', 1),
+                    $request->query->getInt('limit', 4)
+                );
 
         return $this->render('reparateur/index.html.twig', array(
-            'reparateurs' => $reparateurs,
+            'reparateurs' => $result,
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -37,6 +57,9 @@ class ReparateurController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $reparateur = new Reparateur();
         $form = $this->createForm('ReparationBundle\Form\ReparateurType', $reparateur);
         $form->handleRequest($request);
@@ -49,10 +72,11 @@ class ReparateurController extends Controller
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             $file->move(
-                $this->getParameter('images_directory'), $fileName
+                $this->getParameter('image_directory'), $fileName
             );
 
             $reparateur->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($reparateur);
             $em->flush();
@@ -64,6 +88,12 @@ class ReparateurController extends Controller
             'reparateur' => $reparateur,
             'form' => $form->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -72,12 +102,21 @@ class ReparateurController extends Controller
      */
     public function showAction(Reparateur $reparateur)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $deleteForm = $this->createDeleteForm($reparateur);
 
         return $this->render('reparateur/show.html.twig', array(
             'reparateur' => $reparateur,
             'delete_form' => $deleteForm->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -88,24 +127,28 @@ class ReparateurController extends Controller
     {
         $img=$reparateur->getImage();
         $reparateur->setImage(
-            new \Symfony\Component\HttpFoundation\File\File($this->getParameter('images_directory').'/'.$reparateur->getImage()
+            new \Symfony\Component\HttpFoundation\File\File($this->getParameter('image_directory').'/'.$reparateur->getImage()
             ));
         $deleteForm = $this->createDeleteForm($reparateur);
         $editForm = $this->createForm('ReparationBundle\Form\ReparateurType', $reparateur);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            /**
-             * @var UploadedFile $file
-             */
-            $file = $reparateur->getImage();
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            if($reparateur->getImage() !== null) {
+                /**
+                 * @var UploadedFile $file
+                 */
+                $file = $reparateur->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            $file->move(
-                $this->getParameter('images_directory'), $fileName
-            );
+                $file->move(
+                    $this->getParameter('image_directory'), $fileName
+                );
 
-            $reparateur->setImage($fileName);
+                $reparateur->setImage($fileName);
+            }else
+                $reparateur->setImage($img);
+
             $this->getDoctrine()->getManager()->flush();
 
 
@@ -171,5 +214,20 @@ class ReparateurController extends Controller
         ));
     }
 
+    public function searchAction(Request $request)
+    {
 
+        $em = $this->getDoctrine()->getManager();
+
+        $reparateurs = $em->getRepository('ReparationBundle:Reparateur')->findAll();
+
+        if($request->isMethod("POST"))
+        {
+            $etat = $request->get('status');
+            $reparateurs = $em->getRepository('ReparationBundle:Reparateur')->findBy(array('status'=>$etat));
+        }
+        return $this->render('reparateur/search.html.twig', array(
+            'reparateurs' => $reparateurs,
+        ));
+    }
 }

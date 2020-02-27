@@ -23,5 +23,10 @@ facture_delete:
     defaults: { _controller: "ReparationBundle:Facture:delete" }
     methods:  DELETE
 facture_pdf:
-    path:     /pdf
+    path:     /pdf/{id}
     defaults: { _controller: "ReparationBundle:Facture:pdf" }
+
+facture_check:
+    path:     /{id}/check
+    defaults: { _controller: "ReparationBundle:Facture:check" }
+    methods:  GET

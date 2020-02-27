@@ -10,4 +10,5 @@ namespace ShopBundle\Repository;
  */
 class CommandeRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

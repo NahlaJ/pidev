@@ -32,3 +32,8 @@ reparateur_frontindex:
     path:     /frontindex
     defaults: { _controller: "ReparationBundle:Reparateur:frontindex" }
     methods:  GET
+
+reparateur_search:
+    path:     /search
+    defaults: { _controller: "ReparationBundle:Reparateur:search" }
+    methods:  [GET, POST]

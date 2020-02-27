@@ -1,70 +1,246 @@
 {% extends 'dashbase.html.twig' %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8001/event/">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block content %}
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Repairers</h4>
-                        <p class="card-category">List of Repairers</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Numtel</th>
-                <th>Experience</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reparateur in reparateurs %}
-            <tr>
-                <td><a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">{{ reparateur.id }}</a></td>
-                <td>{{ reparateur.nom }}</td>
-                <td>{{ reparateur.prenom }}</td>
-                <td>{{ reparateur.numTel }}</td>
-                <td>{{ reparateur.experience }}</td>
-                {% if reparateur.status == "occupé" %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <head>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        </head>
 
-                <td><p style="color:#9F0053";>{{ reparateur.status }}</p></td>
-                {% else %}
-                    <td><p style="color:#00ff80";>{{ reparateur.status }}</p></td>
 
-                    {% endif %}
-                    <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('reparateur_new') }}">Add a new repairer</a>
-        </li>
-    </ul>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
 
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Repairers</h4>
+                                <p class="card-category">List of Repairers</p><p align="right">
+                                    <button type="button" class="btn btn-success btn-filter" data-target="libre">Free</button>
+                                    <button type="button" class="btn btn-warning btn-filter" data-target="occupé">Occupied</button>
+                                    <button type="button" class="btn btn-default btn-filter" data-target="all">All</button></p>
+                            </div>
+
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                        <tr data-status="aa">
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Family Name</th>
+                                            <th>Phone</th>
+                                            <th>Experience</th>
+                                            <th>Repairer</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <script>
+                                            $(document).ready(function () {
+
+                                                $('.star').on('click', function () {
+                                                    $(this).toggleClass('star-checked');
+                                                });
+
+                                                $('.ckbox label').on('click', function () {
+                                                    $(this).parents('tr').toggleClass('selected');
+                                                });
+
+                                                $('.btn-filter').on('click', function () {
+                                                    var $target = $(this).data('target');
+                                                    if ($target != 'all') {
+                                                        $('.table tr').css('display', 'none');
+                                                        $('.table tr[data-status="aa"]').fadeIn('slow');
+                                                        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+                                                    } else {
+                                                        $('.table tr').css('display', 'none').fadeIn('slow');
+                                                    }
+                                                });
+
+                                            });
+                                        </script>
+                                        <tbody>
+
+                                        {% for reparateur in reparateurs %}
+                                            {% if reparateur.status == "zzz" %}
+                                                <td  data-status="all">
+                                                <td><a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">{{ reparateur.id }}</a></td>
+                                                <td>{{ reparateur.nom }}</td>
+                                                <td>{{ reparateur.prenom }}</td>
+                                                <td>{{ reparateur.numTel }}</td>
+                                                <td>{{ reparateur.experience }}</td>
+                                                <td><img src="{{ asset('uploads/images/' ~ reparateur.image) }}" style="height: 100px;width: 100px"></td>
+
+                                                {% if reparateur.status == "occupé" %}
+                                                    <td><p style="color:red";>Occupied</p></td>
+                                                {% else  %}
+                                                    <td><p style="color:#00ff80";>Free</p></td>
+                                                {% endif %}
+                                                <td>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}"><img src="{{ asset('images/eye.png') }}" width="30" height="30"></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }}"><img src="{{ asset('images/update.png') }}" width="30" height="30"></a>
+                                                        </li>
+
+                                                    </ul>
+                                                </td>
+                                                </tr>
+                                            {% elseif reparateur.status == "occupé" %}
+                                                <tr  data-status="occupé">
+                                                    <td><a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">{{ reparateur.id }}</a></td>
+                                                    <td>{{ reparateur.nom }}</td>
+                                                    <td>{{ reparateur.prenom }}</td>
+                                                    <td>{{ reparateur.numTel }}</td>
+                                                    <td>{{ reparateur.experience }}</td>
+                                                    <td><img src="{{ asset('uploads/images/' ~ reparateur.image) }}" style="height: 100px;width: 100px" ></td>
+                                                    <td><p style="color:red";>Occupied</p></td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}"><img src="{{ asset('images/eye.png') }}" width="30" height="30"></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }}"><img src="{{ asset('images/update.png') }}" width="30" height="30"></a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            {% elseif reparateur.status =="libre"%}
+                                                <tr  data-status="libre">
+                                                    <td><a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}">{{ reparateur.id }}</a></td>
+                                                    <td>{{ reparateur.nom }}</td>
+                                                    <td>{{ reparateur.prenom }}</td>
+                                                    <td>{{ reparateur.numTel }}</td>
+                                                    <td>{{ reparateur.experience }}</td>
+                                                    <td><img src="{{ asset('uploads/images/' ~ reparateur.image) }}" style="height: 100px;width: 100px" ></td>
+                                                    <td><p style="color:#00ff80";>Free</p></td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="{{ path('reparateur_show', { 'id': reparateur.id }) }}"><img src="{{ asset('images/eye.png') }}" width="30" height="30"></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('reparateur_edit', { 'id': reparateur.id }) }}"><img src="{{ asset('images/update.png') }}" width="30" height="30"></a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+
+
+                                            {% endif %}
+
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br> <div class="navigation text-center" style="margin-top: 20px; margin-bottom:40px ;text-align: center; margin-left: 44%"> {{ knp_pagination_render(reparateurs) }} </div>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('reparateur_new') }}"><img src="{{ asset('images/new.png') }}" width="50" height="50"></a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('reparateur_search') }}">Filter by status</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    {% else %}
+        <center><strong><p style="font-size: 50px"> Sorry, you're not an admin </p></strong></center>
+
+    {% endif %}
 {% endblock %}

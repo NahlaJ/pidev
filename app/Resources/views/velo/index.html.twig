@@ -1,4 +1,85 @@
 {% extends "dashbase.html.twig" %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="http://127.0.0.1:8001/event/">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Velos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
+
 {% block content %}
     <div class="post-container">
         <br>
@@ -8,6 +89,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="material-icons">notifications</i>
+                <div>{{ mgilet_notification_count(app.user) }}</div>
                 <span class="notification"></span>
                 <p class="d-lg-none d-md-block">
                     Some Actions
@@ -17,8 +99,6 @@
                 <a class="dropdown-item" href="{{ path('location_index1') }}">location</a>
             </div>
         </li>
-
-
 
 
         <div class="row">
@@ -34,7 +114,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
                                 <div class="featured-box">
                                     <figure>
-                                        <a href="{{ path('velo_show',{'id': velo.id}) }}"><img class="img-fluid" src="{{ asset('post/' ~ velo.image) }}" alt=""></a>
+                                        <a href="{{ path('velo_show',{'id': velo.id}) }}"><img class="img-fluid" src="{{ asset('post/' ~ velo.image) }}"  width="300" height="250" alt=""></a>
                                     </figure>
                                     <div class="content-wrapper">
                                         <div class="feature-content">
@@ -66,9 +146,10 @@
             </section>
         </div>
     </div>
+    <center>
         <ul>
             <li>
-                <a href="{{ path('velo_new') }}">Create a new velo</a>
+                <a href="{{ path('velo_new') }}"><img src="{{ asset('images/new.png') }}" width="70" height="50"></a>
             </li>
         </ul>
         <ul>
@@ -76,6 +157,7 @@
                 <a href="{{ path('velo_search') }}">recherche</a>
             </li>
         </ul>
+    </center>
     </div>
 
 {% endblock %}

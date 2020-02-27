@@ -22,10 +22,13 @@ class Event
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idevent;
+
+
     /**
-     * @var Date
+     * @var \DateTime
      *
-     * @ORM\Column(name="dateEvent", type="date")
+     * @Assert\GreaterThan("today")
+     * @ORM\Column(name="dateEvent", type="datetime")
      */
     private $dateevent;
 

@@ -69,7 +69,7 @@ class Reparateur
      *
      * @ORM\Column(name="nbr_velo_repare", type="integer")
      */
-    private $nbrVeloRepare;
+    private $nbrVeloRepare=0;
 
     /**
      * @return int
@@ -232,4 +232,6 @@ class Reparateur
     {
         return $this->image;
     }
+
+
 }

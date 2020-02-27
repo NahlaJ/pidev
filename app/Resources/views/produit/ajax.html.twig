@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    <script language = "javascript"
+            src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <script language = "javascript">
+        $(document).ready(function(){
+            $("#loadstudent").on("click", function(event){
+                $.ajax({
+                    url:        '/produit/test/ajax',
+                    type:       'POST',
+                    dataType:   'json',
+                    async:      true,
+
+                    success: function(data, status) {
+                        var e = $('<tr><th>id</th><th>Name</th><th>Address</th></tr>');
+                        $('#student').html('');
+                        $('#student').append(e);
+
+                        for(i = 0; i < data.length; i++) {
+                            student = data[i];
+                            var e = $('<tr><td id ="id"></td><td id = "name"></td><td id = "address"></td></tr>');
+
+                            $('#id', e).html(student['id']);
+                            $('#name', e).html(student['nom']);
+                            $('#address', e).html(student['prix']);
+                            $('#student').append(e);
+                        }
+                    },
+                    error : function(xhr, textStatus, errorThrown) {
+                        alert('Ajax request failed.');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table { border-collapse: collapse; }
+        .table th, td {
+            border-bottom: 1px solid #ddd;
+            width: 250px;
+            text-align: left;
+            align: left;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <a id = "loadstudent" href = "#">Load student information</a>
+    </br>
+    </br>
+
+    <table class = "table">
+        <tbody id = "student"></tbody>
+    </table>
+
+{% endblock %}

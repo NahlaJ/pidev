@@ -1,54 +1,87 @@
 {% extends 'dashbase.html.twig' %}
 
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ asset('event') }}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Show  articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Add Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block content %}
-<!--partie l fou9aneya-->
-{% block stats %}
-
-
-    <center>
-        <div class="col-lg-3 col-md-6" id="borderDemo">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-plus-square fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">
-
-                            </div>
-                            <div>Create New</div>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="{{ path('event_new') }}">
-                    <div class="panel-footer">
-                        <span class="bgborder" data-color="#77c385"></span>
-                        <i class="fa fa-upload fa-fw"></i>
-                        <!--span class="pull-left"></span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span-->
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-<br><br>
-        <form method="get" >
-            <input hidden value="TELECHARGER_PDF" name="TELECHARGER_PDF">
-            <input value="TELECHARGER_PDF" type="submit" class="add-to-cart btn btn-default" >
-        </form>
-    </center>
-
-
-
-{% endblock %}
-<!--ekher l partie l fou9aneya-->
-
-{% block body %}
-    <div>
-        <center style="margin-bottom: 40px">
 
             <div class="container" >
                 <br />
@@ -62,11 +95,19 @@
                 </form>
 
 
-                <div class="card-header card-header-primary">
-                    <br>  <center> <h2 class="card-title ">Event List</h2></center>
 
-
-                    <br> <table class="purpleHorizon" border="2">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-primary">
+                                        <h4 class="card-title ">Categories</h4>
+                                        <p class="card-category">This is your current Categories</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="text-primary">
                         <head>
 
                             <th>Idevent</th>
@@ -93,100 +134,69 @@
                                     <td>{{ e.ticketPrice }} </td>
                                     <td>{{ e.nbrePersonnes }}</td>
                                     <td> <img src="{{ asset('images/' ~ e.eventImg) }}" style="width: 80px; height: 150px"> </td>
-                                    <td><a href="{{  path('event_show', { 'idevent': e.idevent}) }}" style="color: #da7908">SHOW</a></td>
+                                    <td><a href="{{  path('event_show', { 'idevent': e.idevent}) }}" style="color: #da7908"><img src="{{ asset('images/eye.png') }}" width="30" height="30"></a></td>
                                     </td>
                                 </tr>
                             {% endfor %}
                         </body>
                     </table>
-                </div></div></center></div>
+                                            <br><br><br>
+
+                                            <div class="navigation text-center" style="margin-top: 20px; margin-bottom:40px ;text-align: center; margin-left: 44%">
+                                                {{ knp_pagination_render(events) }}
+                                            </div>
+
+
+                                            <br><br><br>
+                                        </div>
+<center>
+                                        <div class="col-lg-3 col-md-6" id="borderDemo">
+                                            <div class="panel panel-red">
+                                                <div class="panel-heading">
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <i class="fa fa-plus-square fa-5x"></i>
+                                                        </div>
+                                                        <div class="col-xs-9 text-right">
+                                                            <div class="huge">
+
+                                                            </div>
+                                                            <div>Create New</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <a href="{{ path('event_new') }}">
+                                                    <div class="panel-footer">
+                                                        <span class="bgborder" data-color="#77c385"></span>
+                                                        <i class="fa fa-upload fa-fw"></i>
+                                                        <!--span class="pull-left"></span>
+                                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span-->
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <form method="get" >
+                                            <input hidden value="TELECHARGER_PDF" name="TELECHARGER_PDF">
+                                            <input value="TELECHARGER_PDF" type="submit" class="add-to-cart btn btn-default" >
+                                        </form>
+
+                                        <form method="post" class="nav-link" action="{{ path("event_participants") }}">
+                                            <input type="submit" value="Participant List" >
+                                        </form>
+</center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+
 
 {% endblock %}
-
-
-<div class="navigation text-center" style="margin-top: 20px; margin-bottom:40px ;text-align: center; margin-left: 44%">
-    {{ knp_pagination_render(events) }}
-</div>
-
-
-<br><br><br>
-
-<style>
-    table.purpleHorizon {
-        border: 4px solid #e2a7ff;
-        background-color: #83847a;
-        width: 350px;
-        text-align: center;
-        border-collapse: collapse;
-    }
-    table.purpleHorizon td, table.purpleHorizon th {
-        border: 1px solid #becbc1;
-        padding: 5px 2px;
-    }
-    table.purpleHorizon tbody td {
-        font-size: 13px;
-        font-weight: bold;
-        color: #1d1d1d;
-    }
-    table.purpleHorizon tr:nth-child(even) {
-        background: #e2a7ff;
-    }
-    table.purpleHorizon thead {
-        background: #856c96;
-        border-bottom: 4px solid #e2a7ff;
-    }
-    table.purpleHorizon thead th {
-        font-size: 19px;
-        font-weight: bold;
-        color: #FFFFFF;
-        text-align: left;
-        border-left: 2px solid #792396;
-    }
-    table.purpleHorizon thead th:first-child {
-        border-left: none;
-    }
-
-    table.purpleHorizon tfoot {
-        font-size: 13px;
-        font-weight: bold;
-        color: rgba(21, 21, 21, 0.26);
-        background: #e2a7ff;
-        background: -moz-linear-gradient(top, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
-        background: -webkit-linear-gradient(top, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
-        background: linear-gradient(to bottom, #e2a7ff 0%, #e2a7ff 66%, #e2a7ff 100%);
-        border-top: 5px solid #e260e2;
-    }
-    table.purpleHorizon tfoot td {
-        font-size: 15px;
-    }
-    table.purpleHorizon tfoot .links {
-        text-align: right;
-    }
-    table.purpleHorizon tfoot .links a{
-        display: inline-block;
-        background: #e2a7ff;
-        color: #1d1d1d;
-        padding: 2px 8px;
-        border-radius: 5px;
-    }
-    /* * { margin: 0px; padding: 0px; }*/
-    body {
-
-
-        background: #bbc8be;
-
-    .bgborder {
-        display: block;
-        width: 5px;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        background-color: attr(data-color color);
-    }}
-
-    #borderDemo {
-        border: 5px double rgba(164,81,160,0.68);
-        border-radius: 17px 18px 20px 24px;
-    }
-
-    {% endblock %}

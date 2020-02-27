@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 /**
  * Veloareparer controller.
@@ -21,11 +22,35 @@ class VeloAReparerController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $em = $this->getDoctrine()->getManager();
 
         $veloAReparers = $em->getRepository('ReparationBundle:VeloAReparer')->findAll();
 
         return $this->render('veloareparer/index.html.twig', array(
+            'veloAReparers' => $veloAReparers,
+        ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
+    }
+
+    /**
+     * Lists all veloAReparer entities.
+     *
+     */
+    public function singleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $veloAReparers = $em->getRepository('ReparationBundle:VeloAReparer')->findAll();
+
+        return $this->render('veloareparer/maintenance.html.twig', array(
             'veloAReparers' => $veloAReparers,
         ));
     }
@@ -36,9 +61,11 @@ class VeloAReparerController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = new User();
             $veloAReparer = new Veloareparer();
             $form = $this->createForm('ReparationBundle\Form\VeloAReparerType', $veloAReparer);
             $form->handleRequest($request);
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
             if ($form->isSubmitted() && $form->isValid()) {
                 /**
@@ -48,13 +75,13 @@ class VeloAReparerController extends Controller
                 $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
                 $file->move(
-                    $this->getParameter('images_directory'), $fileName
+                    $this->getParameter('image_directory'), $fileName
                 );
 
                 $veloAReparer->setImage($fileName);
                 $toom= new \DateTime('now');
                 $veloAReparer->setDateR($toom);
-
+                $veloAReparer->setUser($user);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($veloAReparer);
                 $em->flush();
@@ -75,12 +102,21 @@ class VeloAReparerController extends Controller
      */
     public function showAction(VeloAReparer $veloAReparer)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $deleteForm = $this->createDeleteForm($veloAReparer);
 
         return $this->render('veloareparer/show.html.twig', array(
             'veloAReparer' => $veloAReparer,
             'delete_form' => $deleteForm->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -91,7 +127,7 @@ class VeloAReparerController extends Controller
     {
         $img=$veloAReparer->getImage();
         $veloAReparer->setImage(
-            new \Symfony\Component\HttpFoundation\File\File($this->getParameter('images_directory').'/'.$veloAReparer->getImage()
+            new \Symfony\Component\HttpFoundation\File\File($this->getParameter('image_directory').'/'.$veloAReparer->getImage()
             ));
         $deleteForm = $this->createDeleteForm($veloAReparer);
         $editForm = $this->createForm('ReparationBundle\Form\VeloAReparerType', $veloAReparer);
@@ -105,7 +141,7 @@ class VeloAReparerController extends Controller
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             $file->move(
-                $this->getParameter('images_directory'), $fileName
+                $this->getParameter('image_directory'), $fileName
             );
 
             $veloAReparer->setImage($fileName);
@@ -173,6 +209,7 @@ class VeloAReparerController extends Controller
         }
         return $this->render('veloareparer/affecter.html.twig',array('reps'=> $reps));
     }
+
     public function  endRepAction($id, VeloAReparer $veloAReparer){
         $monVelo = $this->getDoctrine()->getRepository(VeloAReparer::class)->find($id);
 

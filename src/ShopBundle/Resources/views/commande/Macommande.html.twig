@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Info de commande : </h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Type produit</th>
+            <th>image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+
+
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in commande %}
+            <tr>
+                <td><h3>{{ c.produit.nom}}</h3></td>
+                <td><h3>{{ c.produit.type}}</h3></td>
+                <td><img src="{{ asset('uploads/images/'~ c.produit.image) }}"></td>
+                <td><h2> {{ c.quantite }} </h2></td>
+                <td><h2>{{c.produit.prix * c.quantite }} $</h2></td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-lg-right"><h1>Total:</h1></td>
+            <td><h1>{{ commande[0].commande.totale }} $</h1></td>
+            <td></td>
+        </tr>
+        </tfoot>
+    </table>
+    <a href="{{ path('mes_commandes') }}" ><h2>Order History</h2></a>
+
+<br>
+<br>
+<br>
+    <button></button>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

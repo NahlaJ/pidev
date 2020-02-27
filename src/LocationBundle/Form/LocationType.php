@@ -15,12 +15,8 @@ class LocationType extends AbstractType
     {
         $builder->add('dateDebut')
 
-            ->add('dateFin')
+            ->add('dateFin');
 
-
-
-
-            ->add('prix');
     }/**
      * {@inheritdoc}
      */

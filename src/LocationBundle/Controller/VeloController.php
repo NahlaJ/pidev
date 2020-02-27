@@ -20,26 +20,45 @@ class VeloController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $em = $this->getDoctrine()->getManager();
-
         $velos = $em->getRepository('LocationBundle:Velo')->findAll();
-
         return $this->render('velo/index.html.twig', array(
             'velos' => $velos,
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
+
     /**
      * Lists all velo entities.
-     *
+     * @param Request $request
+     * @return Response
      */
-    public function indexFrontAction()
+    public function indexFrontAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $velos = $em->getRepository('LocationBundle:Velo')->confirmedVelo();
+        $query = $velos;
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 3)
+        );
 
         return $this->render('velo/indexFront.html.twig', array(
-            'velos' => $velos,
+            'velos' => $result,
         ));
     }
 
@@ -49,6 +68,9 @@ class VeloController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $velo = new Velo();
         $form = $this->createForm('LocationBundle\Form\VeloType', $velo);
         $form->handleRequest($request);
@@ -70,6 +92,12 @@ class VeloController extends Controller
             'velo' => $velo,
             'form' => $form->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**
@@ -78,12 +106,21 @@ class VeloController extends Controller
      */
     public function showAction(Velo $velo)
     {
+        $user = $this->getUser();
+        if ($user != null) {
+            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
         $deleteForm = $this->createDeleteForm($velo);
 
         return $this->render('velo/show.html.twig', array(
             'velo' => $velo,
             'delete_form' => $deleteForm->createView(),
         ));
+            } else {
+                return $this->redirectToRoute('fos_user_security_login');
+            }
+        }
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
     /**
      * Finds and displays a velo entity.

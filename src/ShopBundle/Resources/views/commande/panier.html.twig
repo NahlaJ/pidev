@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="cart">
+        <div class="container">
+            <div class="cart-top">
+                <a href="index.html"><< home</a>
+            </div>
+             {% if items | length > 0  %}
+            <div class="col-md-9 cart-items">
+                <h2>My Shopping Bag({{ items | length }}) USER : {{ app.user.username }}</h2>
+
+
+
+                      {% for item in items %}
+
+                <div class="cart-header2">
+                    <a href="{{ path('supprimer', {'id': item.product.id}) }}" class="close2"> </a>
+
+                    <div class="cart-sec">
+                        <div class="cart-item">
+                            <img src="{{ asset('uploads/images/'~ item.product.image) }}"/>
+                        </div>
+                        <div class="cart-item-info">
+                            <h3>{{item.product.nom}}<span>{{item.product.type}}</span></h3>
+                            {% if item.product.promo != null %}
+                            <h4><span>Rs. $ </span>{{item.product.promo.newPrix * item.quantity }}</h4>
+
+                            {% else %}
+                                <h4><span>Rs. $ </span>{{item.product.prix * item.quantity }}</h4>
+                            {% endif %}
+                            <p class="qty">Qty ::</p>
+                            <input min="1" type="number" id="quantity" name="quantity" value="{{ item.quantity }}" class="form-control input-small">
+                            <a href="{{ path('ajouter' , {'id' : item.product.id}) }}" style="font-size: 25px;">+</a> <a href="{{ path('Less_quantity' , {'id' : item.product.id}) }}" style="font-size: 25px;">-</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="delivery">
+                            <p>Service Charges:: Rs.100.00</p>
+                            <span>Delivered in 2-3 bussiness days</span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                      {% endfor %}
+            </div>
+
+            <div class="col-md-3 cart-total">
+                <a class="continue" href="{{ path('order') }}">Order Now</a>
+                <a class="continue" href="{{ path('viderPAnier') }}">Empty Basket</a>
+                <div class="price-details">
+                    <h3>Price Details</h3>
+                    <span>Total</span>
+                    <span class="total">{{total}}</span>
+                    <span>Discount</span>
+                    <span class="total">---</span>
+                    <span>Delivery Charges</span>
+                    <span class="total">0</span>
+                    <div class="clearfix"></div>
+                </div>
+                <h4 class="last-price">TOTAL</h4>
+                <span class="total final">{{total}}</span>
+
+            {% else %}
+            <h2>My Shopping Bag({{ items | length }})</h2>
+            <h3>Your Cart is empty</h3>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

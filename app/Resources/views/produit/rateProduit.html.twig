@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/rating.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <div class="product">
+        <div class="container">
+            <img src="{{ asset('uploads/images/'~ produit.image )}}">
+            <h3>{{ produit.nom }}</h3>
+            <div class="ctnt-bar cntnt">
+                
+               {{ form_start(form) }}
+                {{ form_widget(form.rating) }}
+                <br>
+                <input type="submit" value="submitRate" style="background: #b3e5fc">
+                <br>
+                <br>
+                <br>
+                {{ form_end(form) }}
+
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+                <script src="{{ asset('js/rating.js') }}"></script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

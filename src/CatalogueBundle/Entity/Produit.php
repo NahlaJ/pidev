@@ -3,6 +3,9 @@
 namespace CatalogueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Date;
+
 
 /**
  * Produit
@@ -31,6 +34,13 @@ class Produit
     /**
      * @var string
      *
+     * @ORM\Column(name="marque", type="string", length=255)
+     */
+    private $marque;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -42,16 +52,25 @@ class Produit
      */
     private $prix;
 
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateAjout", type="datetime")
+     */
+    private $added;
+
     /**
      * @var int
-     *
+     * @Assert\GreaterThan(0)
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
 
     /**
      * @var string
-     *
+     * @Assert\Image()
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
@@ -71,32 +90,36 @@ class Produit
     private $taille;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="qualite", type="integer")
-     */
-    private $qualite;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="niveau", type="string", length=255)
+     * @ORM\Column(name="sexe", type="string", length=255)
      */
-    private $niveau;
+    private $sexe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private $Categorie;
 
     /**
      * @var int
      *
      * @ORM\Column(name="views", type="integer")
      */
-    private $views;
+    private $views =0 ;
 
     /**
      * @var int
      *
      * @ORM\Column(name="nbr_achat", type="integer")
      */
-    private $nbrAchat;
+    private $nbrAchat =0;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Promo", mappedBy="produit")
+     */
+    private $promo = null;
 
 
     /**
@@ -146,6 +169,7 @@ class Produit
 
         return $this;
     }
+
 
     /**
      * Get description
@@ -277,53 +301,7 @@ class Produit
         return $this->taille;
     }
 
-    /**
-     * Set qualite
-     *
-     * @param integer $qualite
-     *
-     * @return Produit
-     */
-    public function setQualite($qualite)
-    {
-        $this->qualite = $qualite;
 
-        return $this;
-    }
-
-    /**
-     * Get qualite
-     *
-     * @return int
-     */
-    public function getQualite()
-    {
-        return $this->qualite;
-    }
-
-    /**
-     * Set niveau
-     *
-     * @param string $niveau
-     *
-     * @return Produit
-     */
-    public function setNiveau($niveau)
-    {
-        $this->niveau = $niveau;
-
-        return $this;
-    }
-
-    /**
-     * Get niveau
-     *
-     * @return string
-     */
-    public function getNiveau()
-    {
-        return $this->niveau;
-    }
 
     /**
      * Set views
@@ -372,5 +350,130 @@ class Produit
     {
         return $this->nbrAchat;
     }
-}
 
+    /**
+     * Set marque
+     *
+     * @param string $marque
+     *
+     * @return Produit
+     */
+    public function setMarque($marque)
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * Get marque
+     *
+     * @return string
+     */
+    public function getMarque()
+    {
+        return $this->marque;
+    }
+
+    /**
+     * Set sexe
+     *
+     * @param string $sexe
+     *
+     * @return Produit
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe
+     *
+     * @return string
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \CatalogueBundle\Entity\Categorie $categorie
+     *
+     * @return Produit
+     */
+    public function setCategorie(\CatalogueBundle\Entity\Categorie $categorie = null)
+    {
+        $this->Categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \CatalogueBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->Categorie;
+    }
+
+    /**
+     * Set promo
+     *
+     * @param \CatalogueBundle\Entity\Promo $promo
+     *
+     * @return Produit
+     */
+    public function setPromo(\CatalogueBundle\Entity\Promo $promo = null)
+    {
+        $this->promo = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Get promo
+     *
+     * @return \CatalogueBundle\Entity\Promo
+     */
+    public function getPromo()
+    {
+        return $this->promo;
+    }
+
+
+
+    /**
+     * Set added
+     *
+     * @param \DateTime $added
+     *
+     * @return Produit
+     */
+    public function setAdded($added)
+    {
+        $this->added = $added;
+
+        return $this;
+    }
+
+    /**
+     * Get added
+     *
+     * @return \DateTime
+     */
+    public function getAdded()
+    {
+        return $this->added;
+    }
+
+
+
+
+}

@@ -18819,5 +18819,27 @@ Copyright (c) 2015 Daniel Eden
     display: none !important;
   }
 }
+.label888
+{
+  margin-top: 20px;
+  width: 50%;
+  text-align: center;
+  margin-left: 25%;
+  opacity: 70%;
+}
 
+.label888:hover
+{
+  opacity: 100%;
+}
+
+
+.select888 {
+  width: 100%;
+  padding: 7px 7px;
+  border: none;
+  border-radius: 4px;
+  background-color: whitesmoke;
+  text-align: center;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

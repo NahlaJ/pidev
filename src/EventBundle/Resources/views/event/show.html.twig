@@ -1,12 +1,111 @@
 {% extends 'dashbase.html.twig' %}
+{% block nav %}
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item  ">
+                <a class="nav-link" href="{{ asset('categorie') }}">
+                    <i class="material-icons">person</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('produit') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Products</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ asset('promo') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Promo</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{path('show_commandes')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Commandes</p>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ asset('event')}}">
+                    <i class="material-icons">bubble_chart</i>
+                    <p>Events</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('velo_index') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('facture_index') }}">
+                    <i class="material-icons">person</i>
+                    <p>Bills</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('veloR_index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Broken Bikes</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('reparateur_index') }}">
+                    <i class="material-icons">library_books</i>
+                    <p>Repairers</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('location_index1') }}">
+                    <i class="material-icons">location_ons</i>
+                    <p>location</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('listeu') }}">
+                    <i class="material-icons">Consulter les articles</i>
+                    <p>Consulter les articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{  path('addu') }}">
+                    <i class="material-icons">Ajouter Article</i>
+                    <p>Ajouter Article</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}
 
 {% block content %}
-    <h1 style="text-autospace: ideograph-alpha" >Event</h1>
-    <center>
-    <div class="col-md-4"></div>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="margin-left: 45px; margin-top: 20px">
-        <div class="tile" style="width: 320px; height: 760px">
-            <div class="wrapper">
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<p class="lead"><a href="{{ path('velo_index') }}">Home</a></p>
+<div class="row">
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+        <!-- Title -->
+        <h1 class="mt-4"></h1>
+        <!-- Author -->
+        <!-- Preview Image -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <p class="card-category"></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+
                 <div class="header"><strong>NAME  </strong>{{ event.nomEvent }}</div>
 
                 <div class="banner-img" style="width: 310px; height: 470px">
@@ -38,24 +137,25 @@
                         <strong>Description:  </strong> {{ event.description }}
                     </div>
                 </div>
-
+<center>
                 <ul>
                     <br>
-                        <a href="{{ path('event_index') }}">Back to the list</a>
+                        <a href="{{ path('event_index') }}"><img src="{{ asset('images/back.png') }}" width="50" height="50"></a>
 
                     <br>
-                        <a href="{{ path('event_edit', { 'idevent': event.idevent }) }}">Update</a>
+                        <a href="{{ path('event_edit', { 'idevent': event.idevent }) }}"><img src="{{ asset('images/update.png') }}" width="50" height="50"></a>
 
                     <br>
                         {{ form_start(delete_form) }}
-                        <input type="submit" value="Delete">
+                        <input type="image" alt="submit" src="{{ asset('images/delete.png') }}" width="50" height="50">
                         {{ form_end(delete_form) }}
 
                 </ul>
-
+</center>
             </div>
         </div>
     </div>
+                    </div></div></div></div></div></div>
     </center>
 
 {% endblock %}

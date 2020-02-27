@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/rating.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="product">
+        <div class="container">
+            <div class="ctnt-bar cntnt">
+                <div class="content-bar">
+                    <div class="single-page">
+                        <div class="product-head">
+                            <a href="index.html">Home</a> <span>::</span> <a href="index.html">Products</a> <span>::</span> <strong>{{ produit.nom}}</strong>
+                        </div>
+
+                        <!--Include the Etalage files-->
+                        <link rel="stylesheet" href="{{ asset('css/etalage.css') }}">
+
+                        <div class="details-left-slider">
+                            <div class="grid images_3_of_2">
+                                <ul id="etalage">
+                                    <li>
+                                        <a href="optionallink.html">
+                                            <img class="etalage_thumb_image" src="{{ asset('uploads/images/'~ produit.image )}}" class="img-responsive" />
+                                            <img class="etalage_source_image" src="{{ asset('uploads/images/'~ produit.image )}}" class="img-responsive" title="" />
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <!--//details-product-slider-->
+                        <div class="details-left-info">
+
+                            {% if produit.promo != null %}
+                                {% if produit.promo.dateDebut <= now %}
+                                <h3>{{ produit.nom}} <i style="color: seagreen">On Discount</i>
+                                    <strong  style=" position: relative;left: 450px;top: 0px;z-index: -1;">
+                                        <img src="{{ asset('images/visibility-24px.svg ') }}" alt="views">
+                                        {{ produit.views}}</strong>
+
+                                </h3>
+
+                                <p><label>$</label> <del>{{ produit.prix}}</del>  <label>$</label> {{ produit.promo.newPrix }}  <a href="#">Click for offer</a></p>
+                                <p class="size">SIZE ::</p>
+                                <a class="length" href="#">{{ produit.taille}}</a>
+                                <div class="btn_form">
+                                    <a href="{{ path('ajouter' , {'id' : produit.id}) }}">ADD TO CART</a>
+                                </div>
+                                {% else %}
+                                    <h3>{{ produit.nom}}
+                                        <strong  style=" position: relative;left: 450px;top: 0px;z-index: -1;">
+                                            <img src="{{ asset('images/visibility-24px.svg ') }}" alt="views">
+                                            {{ produit.views}}</strong>
+
+                                    </h3>
+
+                                    <p><label>$</label> {{ produit.prix}} <a href="#">Click for offer</a></p>
+
+                                    <p class="size">SIZE ::</p>
+                                    <a class="length" href="#">{{ produit.taille}}</a>
+                                    <div class="btn_form">
+                                        <a href="{{ path('ajouter' , {'id' : produit.id}) }}">ADD TO CART</a>
+                                    </div>
+                                {% endif %}
+                           {% else %}
+                               <h3>{{ produit.nom}}
+                                   <strong  style=" position: relative;left: 450px;top: 0px;z-index: -1;">
+                                       <img src="{{ asset('images/visibility-24px.svg ') }}" alt="views">
+                                       {{ produit.views}}</strong>
+
+                               </h3>
+
+                               <p><label>$</label> {{ produit.prix}} <a href="#">Click for offer</a></p>
+
+                               <p class="size">SIZE ::</p>
+                               <a class="length" href="#">{{ produit.taille}}</a>
+                               <div class="btn_form">
+                                   <a href="{{ path('ajouter' , {'id' : produit.id}) }}">ADD TO CART</a>
+                               </div>
+                            {% endif %}
+
+                            <div class="bike-type">
+                                <p>TYPE  ::<a href="#">{{ produit.type}}</a></p>
+                                <p>BRAND  ::<a href="#">{{ produit.marque}}</a></p>
+                                <p>FOR  ::<a href="#">{{ produit.sexe}}</a></p>
+                            </div>
+                            <div class="bike-mdl888">
+                                {% if produit.quantite > 0 %}
+                                    <h4 style="color: darkolivegreen">En Stock</h4>
+                                {% else %}
+                                    <h4 style="color: darkred">Out Of Stock</h4>
+                                {% endif %}
+                            </div>
+
+                            <h5>Description  ::</h5>
+                            <p class="desc">{{ produit.description}}</p>
+                            <br><br>
+                            <div class="bike-mdl888">
+                                {{ socialButtons() }}
+                            </div>
+                            <br>
+                            <br>
+                            <center>
+                           {{ moy|rating }}
+
+                            <div class="btn_form">
+
+                                <a href="{{ path('produit_rate' , {'id' : produit.id}) }}">Rate This Product</a>
+                            </div>
+                            </center>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+           {#  <div class="single-bottom2">
+                <h6>Related Products</h6>
+                <div class="product">
+                    <div class="product-desc">
+                        <div class="product-img product-img2">
+                            <img src="images/s1.jpg" class="img-responsive " alt=""/>
+                        </div>
+                        <div class="prod1-desc">
+                            <h5><a class="product_link" href="bicycles.html">Road Bike</a></h5>
+                            <p class="product_descr"> Vivamus ante lorem, eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.eleifend nec interdum non, ullamcorper et arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra. </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="product_price">
+                        <span class="price-access">$300.51</span>
+                        <a class="button1" href="#"><span>Add to cart</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>#}
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.etalage.min.js') }}"></script>
+    <script>
+        jQuery(document).ready(function($){
+
+            $('#etalage').etalage({
+                thumb_image_width: 400,
+                thumb_image_height: 400,
+                source_image_width: 800,
+                source_image_height: 1000,
+                show_hint: true,
+                click_callback: function(image_anchor, instance_id){
+                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                }
+            });
+
+        });
+    </script>
+    <script src="{{ asset('js/rating.js') }}"></script>
+{% endblock %}
+

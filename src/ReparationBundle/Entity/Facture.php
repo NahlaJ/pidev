@@ -3,6 +3,8 @@
 namespace ReparationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Facture
@@ -37,7 +39,7 @@ class Facture
 
     /**
      * @var \DateTime
-     *
+     * @Assert\GreaterThan("today")
      * @ORM\Column(name="date_Remise", type="datetime")
      */
     private $dateRemise;
@@ -124,5 +126,30 @@ class Facture
     {
         return $this->dateRemise;
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="VeloAReparer" ,inversedBy="facture")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private $veloAReparer;
+
+    /**
+     * @return mixed
+     */
+    public function getVeloAReparer()
+    {
+        return $this->veloAReparer;
+    }
+
+    /**
+     * @param mixed $veloAReparer
+     */
+    public function setVeloAReparer($veloAReparer)
+    {
+        $this->veloAReparer = $veloAReparer;
+    }
+
+
+
 }
 

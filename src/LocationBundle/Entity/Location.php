@@ -24,7 +24,7 @@ class Location
 
     /**
      * @var \DateTime
-     *
+     * @Assert\GreaterThan("today")
      * @ORM\Column(name="dateDebut", type="datetime")
      *
      */

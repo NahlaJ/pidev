@@ -53,10 +53,14 @@ deleteuComment:
     path:     /deleteuComment/{id}
     defaults: { _controller: ArticleBundle:Article:deleteuComment }
 
-search:
-    path:     /search
+asearch:
+    path:     /asearch
     defaults: { _controller: ArticleBundle:Article:search }
 
-accepter:
-    path:     /accepter/{id}
+aaccepter:
+    path:     /aaccepter/{id}
     defaults: { _controller: ArticleBundle:Article:accepter }
+
+mes:
+    path:     /mes
+    defaults: { _controller: ArticleBundle:Article:listem }
